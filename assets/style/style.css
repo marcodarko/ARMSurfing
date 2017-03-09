@@ -60,40 +60,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 /*MIDDLE SECTIONS*/
 
 #middleContainer{
-	box-sizing: border-box;
+	padding: 0;
+	margin:0;
+
 }
-
+	/*This is where you the left box witht the main weather info resides*/
 	#weatherContainer{
-		height: inherit;
-	 background-color: purple;
-
+	min-height: 450px;
+	background-color: purple;
+	color: white;
+	text-shadow: 2px 2px 2px #3e5d96;
+	padding: 30px;
+	font-size: 4vw;
+	font-family: mySecondFont; 
+	background-image: url('../images/beachDefault.jpg');
+	background-position: top left;
+	background-size: cover;
 	}
 
 	#detailsContainer{
 	padding: 0;
+	margin:0;
 	}
 		#cityBox{
 			background-color: violet;
+			padding: 30px;
 		}
 
-		#dayAndVideoContainer{
-			display: flex;
-			flex-direction: row;
-
-		}
 
 			#dayInfoBox{
-				flex:1;
+				min-height: 300px;
 				background-color: orange;
 			}
 
 			#videoBox{
-				flex:1;
+				min-height: 300px;
 				background-color: grey;
 			}
 
 		#mapBox{
-
+			height: 300px;
 			background-color: lightblue;
 		}
 
