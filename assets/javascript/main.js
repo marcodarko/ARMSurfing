@@ -4,8 +4,6 @@
 // #weatherContainer will have the video background
 
 
-
-
 //                    YOUTUBE API INITIALIZATION
 
 
@@ -97,6 +95,9 @@ function search() {
 // event listener to search YoutTube when user clicks search button
 $("#searchButton").on("click", function(){
 
+	// on click, the surfboard logo calls the SVG Animator library to animate it
+	new Vivus('animatedLogo', {duration: 100});
+
 	var query = $('#user-search').val();
 	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
@@ -108,7 +109,7 @@ $("#searchButton").on("click", function(){
 			$.ajax({
 				url: queryURL,
 				method: "GET",
-				
+
 			}).done(function(response) {
 
 				console.log(response);

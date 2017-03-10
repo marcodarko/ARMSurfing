@@ -1,3 +1,26 @@
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+
 html, body{
 	height: 100%;
 	width: 100%;
@@ -56,13 +79,13 @@ text-align: center;
 
 
 #searchBox{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#04b0f4+2,046eef+41,0e0e0e+100 */
-background: rgb(4,176,244); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(4,176,244,1) 2%, rgba(4,110,239,1) 41%, rgba(14,14,14,1) 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(4,176,244,1) 2%,rgba(4,110,239,1) 41%,rgba(14,14,14,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  rgba(4,176,244,1) 2%,rgba(4,110,239,1) 41%,rgba(14,14,14,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04b0f4', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: linear-gradient(291deg, #fce700, #410151, #d700ff);
+	background-size: 600% 600%;
 
+	-webkit-animation: AnimationName 21s ease infinite;
+	-moz-animation: AnimationName 21s ease infinite;
+	-o-animation: AnimationName 21s ease infinite;
+	animation: AnimationName 21s ease infinite;
 	padding: 30px 60px;
 }
 
@@ -112,6 +135,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04b0f4', end
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
 			color: white;
 			padding: 30px;
+			text-align: center;
 		}
 
 
@@ -144,8 +168,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04b0f4', end
 .myFooter{
 	text-align: center;
 	padding: 30px;
-	background-color: black;
 	color:white;
 	font-family: sans-serif;
+	background: linear-gradient(291deg, #008ffc, #410151, #00fff1);
+background-size: 600% 600%;
+
+-webkit-animation: AnimationName 21s ease infinite;
+-moz-animation: AnimationName 21s ease infinite;
+-o-animation: AnimationName 21s ease infinite;
+animation: AnimationName 21s ease infinite;
 
 }
