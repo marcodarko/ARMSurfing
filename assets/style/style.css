@@ -105,10 +105,10 @@ text-align: center;
 }
 	/*This is where you the left box witht the main weather info resides*/
 	#weatherContainer{
-	min-height: 920px;
-
+		
+	min-height: 1000px;
 	background-color: purple;
-
+	
 	color: white;
 	text-shadow: 2px 2px 2px #3e5d96;
 	padding: 30px;
