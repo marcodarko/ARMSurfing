@@ -2,111 +2,93 @@
 <!DOCTYPE html>
 <!-- sets language -->
 <html lang="en-us">
+
 <head>
-	<!-- loads style sheet -->
-	<link rel="stylesheet" type="text/css" href="assets/style/reset.css">
-	<!-- loads jquery -->
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<!-- loads bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<!-- loads in bootstrp js -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- loads style sheet -->
-	<link rel="stylesheet" type="text/css" href="assets/style/style.css">
-	<!-- Firebase Reference -->
-	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/vacation-spots/512/Vacation_Spots_surfing-512.png" sizes="32x32" />
+    <!-- loads style sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/style/reset.css">
+    <!-- loads jquery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- loads bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- loads in bootstrp js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- loads style sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/style/style.css">
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/vacation-spots/512/Vacation_Spots_surfing-512.png" sizes="32x32" />
+    <script src="https://use.fontawesome.com/6f914d09f0.js"></script>
 
-	<meta charset="utf-8">
-	<!-- Tells different screen sizes to use relative size -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>
-		ARMSurfing
-	</title>
+    <meta charset="utf-8">
+    <!-- Tells different screen sizes to use relative size -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        ARMSurfing
+    </title>
 </head>
+
 <body>
-
-	<!-- This Contains all -->
-	<article class="container-fluid row" id="mainContainer">
-
-
-	<!-- TOP SECTION -->
-		<section class="row" id="topContainer">
-			<div id="hero">
-				
-				<h1 id="logoFont">ARMSurfing</h1>
-
-			</div>
-			<div id="searchBox" class="justify-content-center">
-				 <div  id="boxSearchContainer" class="input-group">
-				      <input type="text" class="form-control" placeholder="Search for...">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button">Go!</button>
+    <!-- This Contains all -->
+    <article class="container-fluid row" id="mainContainer">
+        <!-- TOP SECTION -->
+        <section class="row" id="topContainer">
+            <div id="hero">
+                <h1 id="logoFont">ARMSurfing</h1>
+            </div>
+            <div id="searchBox" class="justify-content-center">
+                <div id="boxSearchContainer" class="input-group">
+                    <input id="user-search" type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+				        <button id="searchButton" class="btn btn-default" type="button">Go!</button>
 				      </span>
-				</div><!-- /input-group -->
-			</div>
-
-		</section >
-		
-		<!-- weather SECTION -->
-		<section class="row col-lg-5 col-md-5 col-sm-12" id="middleContainer">
-
-			<div id="weatherContainer">
-
-				weather
-				
-			</div>
-
-		</section>
-
-		<section class="row col-lg-7 col-md-7 col-sm-12" id="detailsContainer">
-			<!-- details section -->
-			
-
-				<div id="cityBox">
-
-					La Jolla, CA
-
-				</div>
-				<!--  -->
-				<div id="dayAndVideoContainer">
-
-					<div id="dayInfoBox">
-
-						<table class="table">
-							<thead>
-								<td>Desc 1</td>
-								<td>Desc 2</td>
-								<td>Desc 3</td>
-							</thead>
-							<tbody id="timeInfoHere">
-								<td>data1 </td>
-								<td>data2</td>
-								<td>data3</td>
-							</tbody>
-						</table>
-					</div>
-
-					<div id="videoBox">
-							VIDEO FEED
-					</div>
-				</div>
-				
-				<!--  -->
-				<div id="mapBox">
-
-					Map Goes Here
-
-				</div>
-			
-
-		</section>
-
-	</article>
-	<!-- loads in external JS file -->
-	<script type="text/javascript" src="assets/javascript/main.js"></script>
+                </div>
+                <!-- /input-group -->
+            </div>
+        </section>
+        <!-- weather SECTION -->
+        <section class="row col-lg-5 col-md-5 col-sm-12" id="middleContainer">
+            <div id="weatherContainer">
+                weather
+            </div>
+        </section>
+        <section class="row col-lg-7 col-md-7 col-sm-12" id="detailsContainer">
+            <!-- details section -->
+            <div id="cityBox">
+                La Jolla, CA
+            </div>
+            <!--  -->
+            <div id="dayAndVideoContainer">
+                <div id="dayInfoBox">
+                    <table class="table">
+                        <thead>
+                            <td>Desc 1</td>
+                            <td>Desc 2</td>
+                            <td>Desc 3</td>
+                        </thead>
+                        <tbody id="timeInfoHere">
+                            <td>data1 </td>
+                            <td>data2</td>
+                            <td>data3</td>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="videoBox">
+                    VIDEO FEED
+                </div>
+            </div>
+            <!--  -->
+            <div><i class="fa fa-ship fa-lg" aria-hidden="true"></i></div>
+            <div id="mapBox">
+                Map Goes Here
+            </div>
+        </section>
+    </article>
+ 
+    <!-- loads Google Places library -->
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA&libraries=places&callback=initMap"></script>
+    <!-- loads in external JS file -->
+    <script type="text/javascript" src="assets/javascript/main.js"></script>
 </body>
 
 </html>

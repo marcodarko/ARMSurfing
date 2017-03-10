@@ -1,17 +1,18 @@
-   //Google api 
+   // ************************************** Google api **************************************************//
 
    var userSearch;
    var map, geocoder, infowindow, markers = [],
        marker;
    var request = {};
+   var userLatLng;
    //function to initalize the map this is initially called from the html via parameter callback=initMap
    function initMap() {
 
        // Clear out the old markers.
-       markers.forEach(function(marker) {
-           marker.setMap(null);
-       });
-       markers = [];
+       // markers.forEach(function(marker) {
+       //     marker.setMap(null);
+       // });
+       // markers = [];
 
 
        if ($("#user-search").val() == "") {
@@ -39,7 +40,7 @@
        });
 
        //variable to store the latitude and longitude
-       var userLatLng;
+       userLatLng;
 
        //create markers only when there is a user search
        if ($("#user-search").val() !== "") {
@@ -101,3 +102,17 @@
 
    //Attach an event listener to search button and call the initMap function to update map location 
    $("#searchButton").on('click', initMap);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
