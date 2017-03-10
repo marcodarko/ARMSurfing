@@ -5,10 +5,11 @@
 <head>
 	<!-- loads style sheet -->
 	<link rel="stylesheet" type="text/css" href="assets/style/reset.css">
+	
 	<!-- loads in Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- loads Google Places library -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA&libraries=places"></script>
+   <!-- <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA&libraries=places&callback=initMap"></script> -->
 	<!-- loads jquery -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<!-- loads bootstrap -->
@@ -32,6 +33,10 @@
 </head>
 <body>
 
+				<iframe  id="myVideo" frameborder="0" volume="0" 
+			    src="https://youtube.com/embed/q1Yz0Vfp2jY?autoplay=1&controls=0&showinfo=0&autohide=1">
+			 	 </iframe>
+
 	<!-- This Contains all -->
 	<article class="container-fluid row" id="mainContainer">
 
@@ -42,12 +47,13 @@
 				
 				<h1 id="logoFont">ARMSurfing</h1>
 
+
 			</div>
 			<div id="searchBox" class="justify-content-center">
 				 <div  id="boxSearchContainer" class="input-group">
-				      <input type="text" class="form-control" placeholder="Search for...">
+				      <input id="user-search" type="text" class="form-control" placeholder="Search for...">
 				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button"><i class="fa fa-hand-peace-o" aria-hidden="true"></i></button>
+				        <button class="btn btn-danger" type="button" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
 				      </span>
 				</div><!-- /input-group -->
 			</div>
@@ -61,11 +67,14 @@
 				
 				<div id="mainWeatherInfoHere">
 				<span>Temp: </span><span>85</span><br>
-				<span>Waves: </span><span>Rad</span><br>
-				<span>Wind: </span><span>Nice</span><br>
 				</div>
+				
 
 			</div>
+
+			
+			
+			
 
 		</section>
 
@@ -114,6 +123,12 @@
 				</div>
 			
 
+		</section>
+
+
+		<!-- FOOTER -->
+		<section class="myFooter  col-lg-12 col-md-12 col-sm-12">
+			<img src="assets/images/ARMSlogo.svg" alt="logo" width="300px">
 		</section>
 
 	</article>

@@ -2,11 +2,19 @@ html, body{
 	height: 100%;
 	width: 100%;
 	display: table;
-	background-color: #fafafa;
+	background-color: transparent;
 }
 
-body{
-	
+#myVideo{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translate(-50%, -50%);
 }
 
 @font-face {
@@ -29,9 +37,11 @@ background-image: url('../images/hero.png');
 background-position: top left;
 background-size: cover;
 padding: 0;
+text-align: center;
 }
 
 #logoFont{
+	margin:0;
 	padding: 70px;
 	color: white;
 	font-family: mySecondFont;
@@ -40,13 +50,18 @@ padding: 0;
 	text-shadow: 0px 0px 10px #0c51e2;
 }
 
+#logoFont2{
+	font-family: myFirstFont;
+}
+
+
 #searchBox{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b3dced+0,29b8e5+50,1d4893+100 */
-background: rgb(179,220,237); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(29,72,147,1) 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(29,72,147,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(29,72,147,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#1d4893',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#04b0f4+2,046eef+41,0e0e0e+100 */
+background: rgb(4,176,244); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(4,176,244,1) 2%, rgba(4,110,239,1) 41%, rgba(14,14,14,1) 100%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(4,176,244,1) 2%,rgba(4,110,239,1) 41%,rgba(14,14,14,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center,  rgba(4,176,244,1) 2%,rgba(4,110,239,1) 41%,rgba(14,14,14,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04b0f4', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 	padding: 30px 60px;
 }
@@ -60,22 +75,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 /*MIDDLE SECTIONS*/
 
 #middleContainer{
+	height: auto;
 	padding: 0;
 	margin:0;
 
 }
 	/*This is where you the left box witht the main weather info resides*/
 	#weatherContainer{
-	min-height: 450px;
+	min-height: 920px;
+
 	background-color: purple;
+
 	color: white;
 	text-shadow: 2px 2px 2px #3e5d96;
 	padding: 30px;
 	font-size: 4vw;
 	font-family: mySecondFont; 
 	background-image: url('../images/beachDefault.jpg');
+	background-blend-mode: multiply;
 	background-position: top left;
 	background-size: cover;
+
+
 	}
 
 	#detailsContainer{
@@ -83,23 +104,48 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 	margin:0;
 	}
 		#cityBox{
-			background-color: violet;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
+			background: rgb(107,110,117); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+			color: white;
 			padding: 30px;
 		}
 
 
 			#dayInfoBox{
 				min-height: 300px;
-				background-color: orange;
+				color: white;
+				/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.78+0,0+55 */
+				background: -moz-linear-gradient(top,  rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(top,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to bottom,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+
+			}
+
+			#dayInfoBox thead td{
+				font-weight: bold;
+				color: #22b8ff;
 			}
 
 			#videoBox{
 				min-height: 300px;
-				background-color: grey;
+				background-color: darkgrey;
 			}
 
 		#mapBox{
-			height: 300px;
-			background-color: lightblue;
+			height: 480px;
+			background-color: darkblue;
 		}
 
+.myFooter{
+	text-align: center;
+	padding: 30px;
+	background-color: black;
+	color:white;
+	font-family: sans-serif;
+
+}
