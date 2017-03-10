@@ -1,22 +1,22 @@
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 @-o-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 @keyframes AnimationName { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 
 
@@ -29,38 +29,38 @@ html, body{
 }
 
 #myVideo{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  transform: translate(-50%, -50%);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+	transform: translate(-50%, -50%);
 }
 
 @font-face {
-    font-family: myFirstFont;
-    src: url(../images/fontAvenue.ttf);
-    
+	font-family: myFirstFont;
+	src: url(../images/fontAvenue.ttf);
+	
 }
 
 @font-face {
-    font-family: mySecondFont;
-    src: url(../images/fontGamma.ttf);
-    
+	font-family: mySecondFont;
+	src: url(../images/fontGamma.ttf);
+	
 }
 
 /*TOP SECTION*/
 
 #hero{
 
-background-image: url('../images/hero.png');
-background-position: top left;
-background-size: cover;
-padding: 0;
-text-align: center;
+	background-image: url('../images/hero.png');
+	background-position: top left;
+	background-size: cover;
+	padding: 0;
+	text-align: center;
 }
 
 #logoFont{
@@ -103,9 +103,9 @@ text-align: center;
 	margin:0;
 
 }
-	/*This is where you the left box witht the main weather info resides*/
-	#weatherContainer{
-		
+/*This is where you the left box witht the main weather info resides*/
+#weatherContainer{
+	
 	min-height: 1000px;
 	background-color: purple;
 	
@@ -120,50 +120,51 @@ text-align: center;
 	background-size: cover;
 
 
-	}
+}
 
-	#detailsContainer{
+#detailsContainer{
 	padding: 0;
 	margin:0;
-	}
-		#cityBox{
-			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
-			background: rgb(107,110,117); /* Old browsers */
-			background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
-			color: white;
-			padding: 30px;
-			text-align: center;
-		}
+}
+#cityBox{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
+	background: rgb(107,110,117); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+	color: white;
+	padding: 30px;
+	text-align: center;
+}
 
 
-			#dayInfoBox{
-				min-height: 300px;
-				color: white;
-				/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.78+0,0+55 */
-				background: -moz-linear-gradient(top,  rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-				background: -webkit-linear-gradient(top,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-				background: linear-gradient(to bottom,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+#dayInfoBox{
+	min-height: 300px;
+	color: white;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.78+0,0+55 */
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.78) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 
-			}
+}
 
-			#dayInfoBox thead td{
-				font-weight: bold;
-				color: #22b8ff;
-			}
+#dayInfoBox thead td{
+	font-weight: bold;
+	color: #22b8ff;
+}
 
-			#videoBox{
-				min-height: 300px;
-				background-color: darkgrey;
-			}
+#videoBox{
+	min-height: 300px;
+	background-color: darkgrey;
+}
 
-		#mapBox{
-			height: 480px;
-			background-color: darkblue;
-		}
+#mapBox{
+	height: 480px;
+	background-color: darkblue;
+
+}
 
 .myFooter{
 	text-align: center;
@@ -171,11 +172,11 @@ text-align: center;
 	color:white;
 	font-family: sans-serif;
 	background: linear-gradient(291deg, #008ffc, #410151, #00fff1);
-background-size: 600% 600%;
+	background-size: 600% 600%;
 
--webkit-animation: AnimationName 21s ease infinite;
--moz-animation: AnimationName 21s ease infinite;
--o-animation: AnimationName 21s ease infinite;
-animation: AnimationName 21s ease infinite;
+	-webkit-animation: AnimationName 21s ease infinite;
+	-moz-animation: AnimationName 21s ease infinite;
+	-o-animation: AnimationName 21s ease infinite;
+	animation: AnimationName 21s ease infinite;
 
 }
