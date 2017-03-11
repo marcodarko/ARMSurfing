@@ -51,7 +51,7 @@ $("#searchButton").on("click", function(){
 		var videoID= response.items[0].id.videoId;
 		console.log(imageUrl);
 		$("#weatherContainer").css('background-image', "url("+imageUrl+")");
-		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1");
+		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1");
 	});
 });
 
@@ -82,7 +82,7 @@ $("#searchButton").on("click", function(){
        	userSearch = $("#user-search").val();
        }
 
-       map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12 });
+       map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12, scrollwheel: false });
        console.log(map);
 
        geocoder = new google.maps.Geocoder;
@@ -111,6 +111,7 @@ $("#searchButton").on("click", function(){
            }, function(results, status) { //this anonymus function is called back when the results and status are received from geocode function 
            	if (status == google.maps.GeocoderStatus.OK) {
                    userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
+                   GetFoodPlaces(userLatLng);
                }
 
                //Request takes the userLatLng variable and hard coded radius, type
@@ -169,9 +170,59 @@ $("#searchButton").on("click", function(){
 
 
 
+//  GOOGLE PLACES  
+// KEY:  AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs
 
 
+function GetFoodPlaces(userLatLng){
 
+
+  var GPquery = $('#user-search').val();
+  var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
+
+  var foodLatLng = userLatLng.toString(); 
+  foodLatLng = foodLatLng.substring(1, foodLatLng.length -1);
+
+  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=1000&type=restaurant&key="+GPkey;
+  
+  
+      $.ajax({
+      method: "POST",
+      dataType: "json",
+      url: "https://proxy-cbc.herokuapp.com/proxy",
+      data: {
+        url: GPqueryURL
+      }
+    })
+    .done(function(response){
+
+      console.log("Google Places: ");
+      console.log(response);
+      $("FSResultsHere").empty();
+
+      for (i=0; i< 5; i++){
+
+          var newDiv= $("<div class='foodPlace'>");
+          var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
+          var title=response.data.results[i].photos[0].html_attributions;
+          var br=$("<br>");
+          var open= "OPEN";
+          var closed= "CLOSED";
+          if (response.data.results[i].opening_hours.open_now === true) {
+            var openNow=$("<span class='openNow'>").html(open);
+          }
+          else{
+            var openNow=$("<span class='closedNow'>").html(closed);
+          }
+
+          newDiv.append(icon).append(title).append(br).append(openNow);
+          $("#FSResultsHere").append(newDiv).fadeIn('slow');
+      };
+
+    });
+
+
+};
 
 
 
