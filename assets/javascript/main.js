@@ -167,10 +167,38 @@ $("#searchButton").on("click", function(){
 
 
 
+// ++++++++++++++++++++  FourSquare API  +++++++++++++++++++++++
+
+// KEY  R2UJNZQ3DNIZJURTV3NZPVAK1QZMZU3NCSSTNLFIZALRUYHX
+
+//  SECRET  KDRSTNCB1QYNSGUWJQLVO5N2V5NDBOUVXMG4W4GZ3GEDDCUH
 
 
+$("#searchButton").on("click", function(){
+
+	var query = $('#user-search').val();
+	var FSkey= "R2UJNZQ3DNIZJURTV3NZPVAK1QZMZU3NCSSTNLFIZALRUYHX";
+	var FSsecret= "KDRSTNCB1QYNSGUWJQLVO5N2V5NDBOUVXMG4W4GZ3GEDDCUH";
 
 
+	var queryURL="https://api.foursquare.com/v2/venues/search?near="+query+"&limit=5&client_id="+FSkey+"&client_secret="+FSsecret+"&v=20170101"
+	
+	
+	
+	$.ajax({
+		url: queryURL,
+		method: "GET",
+		beforeSend: function(){
+			$("YelpResultsHere").html("<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>");
+		}
+
+	}).done(function(response) {
+
+		console.log(response);
+		
+		
+	});
+});
 
 
 

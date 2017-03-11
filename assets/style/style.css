@@ -79,8 +79,8 @@ html, body{
 
 
 #searchBox{
-	background: linear-gradient(291deg, #fce700, #410151, #d700ff);
-	background-size: 600% 600%;
+	background: linear-gradient(291deg, cyan, hotpink, purple);
+	background-size: 300% 300%;
 
 	-webkit-animation: AnimationName 21s ease infinite;
 	-moz-animation: AnimationName 21s ease infinite;
@@ -106,7 +106,7 @@ html, body{
 /*This is where you the left box witht the main weather info resides*/
 #weatherContainer{
 	
-	min-height: 1000px;
+	min-height: 500px;
 	background-color: purple;
 	
 	color: white;
@@ -157,12 +157,45 @@ html, body{
 
 #videoBox{
 	min-height: 300px;
-	background-color: darkgrey;
+	background-color: #4e4e4e;
 }
 
 #mapBox{
 	height: 480px;
 	background-color: darkblue;
+
+}
+
+#YelpBox{
+	margin:0;
+	padding: 0;
+	width: 100%;
+	min-height: 100px;
+	background-color: hotpink;
+	color: white;
+	border-bottom: 10px solid #4e4e4e;
+}
+
+#YelpTitle{
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
+	background: rgb(107,110,117); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+	color: white;
+	margin:0;
+	text-align: center;
+	padding: 40px;
+	font-size: 2em;
+	font-family: myFirstFont;
+
+
+}
+
+#YelpResultsHere{
+	margin:0;
+	min-height: 150px;
 
 }
 
