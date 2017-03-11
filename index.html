@@ -2,11 +2,18 @@
 <!DOCTYPE html>
 <!-- sets language -->
 <html lang="en-us">
+
 <head>
 	<!-- loads style sheet -->
 	<link rel="stylesheet" type="text/css" href="assets/style/reset.css">
+
+	<!-- loads in Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- loads jquery -->
 	<script src="https://code.jquery.com/jquery.js"></script>
+
+	<!-- loads SVG animator -->
+	<script src="https://cdn.jsdelivr.net/vivus/latest/vivus.min.js"></script>
 	<!-- loads bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- loads in bootstrp js -->
@@ -17,96 +24,124 @@
 	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/vacation-spots/512/Vacation_Spots_surfing-512.png" sizes="32x32" />
-
 	<meta charset="utf-8">
 	<!-- Tells different screen sizes to use relative size -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>
-		ARMSurfing
-	</title>
 </head>
+
+
 <body>
 
-	<!-- This Contains all -->
-	<article class="container-fluid row" id="mainContainer">
+	<iframe  id="myVideo" frameborder="0" volume="0" 
+	src="https://youtube.com/embed/q1Yz0Vfp2jY?autoplay=1&controls=0&showinfo=0&autohide=1">
+</iframe>
+
+<!-- This Contains all -->
+<article class="container-fluid row" id="mainContainer">
 
 
 	<!-- TOP SECTION -->
-		<section class="row" id="topContainer">
-			<div id="hero">
-				
-				<h1 id="logoFont">ARMSurfing</h1>
+	<section class="row" id="topContainer">
+		<div id="hero">
 
+
+			<h1 id="logoFont">ARMSurfing</h1>
+
+		</div>
+		<div id="searchBox" class="justify-content-center">
+			<div  id="boxSearchContainer" class="input-group">
+				<input id="user-search" type="text" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="button" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
+				</span>
+			</div><!-- /input-group -->
+		</div>
+
+	</section >
+
+	<!-- weather SECTION -->
+	<section class="row col-lg-5 col-md-5 col-sm-12" id="middleContainer">
+
+		<div id="weatherContainer">
+
+			<div id="mainWeatherInfoHere">
+				<span>Temp: </span><span>85</span><br>
 			</div>
-			<div id="searchBox" class="justify-content-center">
-				 <div  id="boxSearchContainer" class="input-group">
-				      <input id="searchText" type="text" class="form-control" placeholder="Search for...">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" id="searchBtn" type="button">Go!</button>
-				      </span>
-				</div><!-- /input-group -->
-			</div>
 
-		</section >
-		
-		<!-- weather SECTION -->
-		<section class="row col-lg-5 col-md-5 col-sm-12" id="middleContainer">
 
-			<div id="weatherContainer">
+		</div>
 
-				weather
-				
-			</div>
 
-		</section>
+	</section> 
 
-		<section class="row col-lg-7 col-md-7 col-sm-12" id="detailsContainer">
-			<!-- details section -->
-			
+	<section class="row col-lg-7 col-md-7 col-sm-12" id="detailsContainer">
+		<!-- details section -->
 
-				<div id="cityBox">
 
-					La Jolla, CA
+		<div id="cityBox" class="col-lg-12 col-md-12 col-sm-12">
 
-				</div>
-				<!--  -->
-				<div id="dayAndVideoContainer">
+			<svg id="animatedLogo" width="100px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 552 540" style="enable-background:new 0 0 552 540;" xml:space="preserve">
+			<ellipse style="fill:none;stroke:#27ADFF;stroke-width:10;stroke-miterlimit:10;" cx="278.5" cy="268.25" rx="243" ry="243.25"/>
+			<path style="fill:none;stroke:hotpink;stroke-width:8.8663;stroke-miterlimit:10;" d="M311.723,464.002h-65.687
+			c0,0-35.083-107.653-32.097-223.431s64.94-167.573,64.94-167.573s61.955,51.795,64.94,167.573
+			C346.805,356.349,311.723,464.002,311.723,464.002z"/>
+		</svg>
 
-					<div id="dayInfoBox">
+		<h1 id="logoFont2">La Jolla, CA</h1>
 
-						<table class="table">
-							<thead>
-								<td>Desc 1</td>
-								<td>Desc 2</td>
-								<td>Desc 3</td>
-							</thead>
-							<tbody id="timeInfoHere">
-								<td>data1 </td>
-								<td>data2</td>
-								<td>data3</td>
-							</tbody>
-						</table>
-					</div>
+	</div>
+	<!-- By Hour Information -->
 
-					<div id="videoBox">
-							VIDEO FEED
-					</div>
-				</div>
-				
-				<!--  -->
-				<div id="mapBox">
 
-					Map Goes Here
+	<div id="dayInfoBox" class="col-lg-6 col-md-6 col-sm-12">
 
-				</div>
-			
+		<table class="table">
+			<thead>
+				<td>Desc 1</td>
+				<td>Desc 2</td>
+				<td>Desc 3</td>
+				<td>Desc 4</td>
+				<td>Desc 5</td>
+			</thead>
+			<tbody id="timeInfoHere">
+				<td>data1 </td>
+				<td>data2</td>
+				<td>data3</td>
+				<td>data4</td>
+				<td>data5</td>
+			</tbody>
+		</table>
+	</div>
 
-		</section>
+	<div id="videoBox" class="col-lg-6 col-md-6 col-sm-12">
+		VIDEO FEED
+	</div>
 
-	</article>
-	<!-- loads in external JS file -->
-	<script type="text/javascript" src="assets/javascript/main.js"></script>
+
+	<!-- Map Box -->
+	<div id="mapBox" class="col-lg-12 col-md-12 col-sm-12">
+
+		Map Goes Here
+
+	</div>
+
+
+</section>
+
+
+<!-- FOOTER -->
+<section class="myFooter  col-lg-12 col-md-12 col-sm-12">
+	<img src="assets/images/ARMSlogo.svg" alt="logo" width="300px">
+	<p>Alex.Ricardo.Marco.Stephen.  Surfing</p>
+</section>
+
+</article>
+
+<!-- loads Google Places library -->
+<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA&libraries=places&callback=initMap"></script>
+<!-- loads in external JS file -->
+<script type="text/javascript" src="assets/javascript/main.js"></script>
 </body>
 
 </html>
