@@ -166,6 +166,35 @@ html, body{
 
 }
 
+#FourSquareBox{
+	margin:0;
+	padding: 0;
+	border-bottom: 6px white solid;
+}
+
+#FSTitle{
+
+	font-family: myFirstFont;
+	min-height: 150px;
+	margin:0;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
+	background: rgb(107,110,117); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+	color: white;
+	padding: 30px;
+	text-align: center;
+}
+
+#FSResultsHere{
+	margin:0;
+	min-height: 150px;
+	background-color: hotpink;
+}
+
+
 .myFooter{
 	text-align: center;
 	padding: 30px;
