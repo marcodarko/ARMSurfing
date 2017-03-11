@@ -9,9 +9,9 @@
     messagingSenderId: "231633652696"
   };
   firebase.initializeApp(config);
-
+  
   var surfStorage = firebase.database();
-
+  //function we'll use to get data from our surf api
   function surfAPI(newURL) {
 
   	$.ajax({
@@ -28,26 +28,28 @@
 $("#searchBtn").on("click", function(){
 	//use "userSearch" for input value
 	var userInput = $("#searchText").val().trim();
-
+	//create new api url thats associated with user input
 	var newQueryURL = basicQueryURL + userInput;
-	
+	//object to store user input into firebase
 	var surfObj = {
 
 		location: userInput
 	};
-
+	//passing new url into surfAPI function
 	surfAPI(newQueryURL);
-
+	//pushing our user input object into firebase
 	surfStorage.ref().push(surfObj);
-
+	//preventing the on submit default setting
 	return false;
 })
 
 surfStorage.ref().on("child_added", function(newChild){
-
+	//checking our data we're receiving from firebase
 	console.log(newChild);
+	//getting our user input from firebase
 	var newLocation = newChild.val().location;
 	console.log(newLocation);
+	//appending the user input into the table
 	$("#timeInfoHere").append("<tr><td>" + newLocation + "</td></tr>");
 
 })
