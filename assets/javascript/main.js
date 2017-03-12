@@ -29,10 +29,15 @@ function search() {
 // event listener to search YoutTube when user clicks search button
 $("#searchButton").on("click", function(){
 
+
 	// on click, the surfboard logo calls the SVG Animator library to animate it
 	new Vivus('animatedLogo', {duration: 100});
 
 	var query = $('#user-search').val();
+
+  // updates city name
+   $("#logoFont2").html(query);
+
 	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
@@ -198,7 +203,7 @@ function GetFoodPlaces(userLatLng){
 
       console.log("Google Places: ");
       console.log(response);
-      $("FSResultsHere").empty();
+      $("FSResultsHere").html("");
 
       for (i=0; i< 5; i++){
 
@@ -206,6 +211,13 @@ function GetFoodPlaces(userLatLng){
           var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
           var title=response.data.results[i].photos[0].html_attributions;
           var br=$("<br>");
+          var row=$("<div>");
+
+            for(i=1; i<=response.data.results[i].rating; i++){
+              var star=$("<span>").html("&#9733;");
+              row.append(star);
+            }
+
           var open= "OPEN";
           var closed= "CLOSED";
           if (response.data.results[i].opening_hours.open_now === true) {
@@ -215,17 +227,21 @@ function GetFoodPlaces(userLatLng){
             var openNow=$("<span class='closedNow'>").html(closed);
           }
 
-          newDiv.append(icon).append(title).append(br).append(openNow);
+          newDiv.append(icon).append(title).append(br).append(row).append(openNow);
           $("#FSResultsHere").append(newDiv).fadeIn('slow');
+
+
+
       };
 
     });
 
-
 };
 
 
-
+$(window).ready(function(){
+  new Vivus('animatedMain', {duration: 100});
+})
 
 
 
