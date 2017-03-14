@@ -203,40 +203,8 @@ function geolocate() {
 
 
 //====================================================================================
-//world wide weather online
-
-// **********local weather******************************
-// var apiKey = "094f52c21f8d4c3dbff24712170903";
-// var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
-//            url += "&q=" + $("#user-search").val();
-//            url += "&format=json";
-//            url += "&key="+ apiKey;
-//            url += "&includelocation=yes";
-//            url += "&fx=" + "yes";
-//        // console.log(url)
-//        // url += "&callback=searchCallback";
-//        // console.log(weatherLatlng);
-
-//        $.ajax({
-//          // dataType: "jsonp",
-//          url: url,
-//          method: 'GET',
-//          // success: searchCallback
-//        }).done(function(dataSnap) {
-
-//            var serverReq = dataSnap.data;
-//            console.log(serverReq)
-
-//            for (var i = 1; i < 7; i++) {
-
-//              var weather = serverReq.current_condition[i].temp_F;
-//              console.log(weather);
-//              var weatherImg = serverReq.current_condition[i].weatherIconUrl[i].value;
-//            }
-
-//            $("#mainWeatherInfoHere").html(weatherImg);
-//            $("#timeInfoHere").append("<tr><td>" + weather + "</td></tr>");
-//***********************Global Variables for World Weather***********************************
+//---------------------------world wide weather online--------------------------------
+//***********************Global Variables for World Weather***************************
 var weatherLatlng; //Set global variable weatherLatlng from google api to use for query on worldwide weather api
 var serverReq;
 var weather;
@@ -278,33 +246,23 @@ weatherLatlng = userLatLng.toString();
 	    console.log(weatherLatlng);
 
 	    $.ajax({
-	      // dataType: "jsonp",
 	      url: url,
 	      method: 'GET',
-	      // success: searchCallback
 	    }).done(function(data) {
 	    	//
 	    	serverReq = data.data;
 	    	console.log(serverReq);
 	    	weather = serverReq.weather[0];
 
-	    	//--------alex working on current local conditions-------
-	    	// var weeklyForecast = weather.date // write something to show weekly forcast
-
 	    	swell = weather.hourly["0"].swellHeight_ft;
 	    	console.log(swell);
 
 	    	iconURL = serverReq.weather[0].hourly["0"].weatherIconUrl["0"].value;
-	    	// .hourly["0"].weatherIconUrl["0"].value
-	    	// iconURL = iconURL.toString();
 	    	console.log(iconURL)
 
 	    	$("#weatherIcon").attr("src", iconURL);
 
-	    	// $("#mainWeatherInfoHere").html(weatherIconUrl + " ");
-
 	    	maxTempF = weather.maxtempF;
-	    	//--------alex working on current local conditions-------
 
 	    	tempF = weather.hourly["0"].tempF;
 	    	console.log(tempF);
@@ -351,7 +309,7 @@ weatherLatlng = userLatLng.toString();
 
 }
 //====================================================================================
-//********************************* Charts.js  ***********************************
+//********************************* Charts.js  ***************************************
 var ctx = $("#myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
