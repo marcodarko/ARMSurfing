@@ -5,26 +5,6 @@
 // //         KEY:   AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw
 // //              #userSearch is user input variable
 
-// After the API loads, call a function to enable the search box.
-function handleAPILoaded() {
-	$('#searchButton').attr('disabled', false);
-}
-
-// Search for a specified string.
-function search() {
-	var q = $('#user-search').val();
-	console.log("q: "+q);
-	var request = gapi.client.youtube.search.list({
-		q: q,
-		part: 'snippet'
-	});
-
-	request.execute(function(response) {
-		var str = JSON.stringify(response.result);
-		console.log("received from YouTube: "+str);
-		$('#weatherContainer').html('<pre>' + str + '</pre>');
-	});
-};
 
 // event listener to search YoutTube when user clicks search button
 $("#searchButton").on("click", function(){
@@ -181,14 +161,13 @@ $("#searchButton").on("click", function(){
 
 function GetFoodPlaces(userLatLng){
 
-
   var GPquery = $('#user-search').val();
   var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
 
   var foodLatLng = userLatLng.toString(); 
   foodLatLng = foodLatLng.substring(1, foodLatLng.length -1);
 
-  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=1000&type=restaurant&key="+GPkey;
+  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=4000&type=restaurant&key="+GPkey;
   
   
       $.ajax({
@@ -203,17 +182,18 @@ function GetFoodPlaces(userLatLng){
 
       console.log("Google Places: ");
       console.log(response);
-      $("FSResultsHere").html("");
+     
 
       for (i=0; i< 5; i++){
 
           var newDiv= $("<div class='foodPlace'>");
           var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
-          var title=response.data.results[i].photos[0].html_attributions;
+          var title=response.data.results[i].photos[0].html_attributions[0];
           var br=$("<br>");
           var row=$("<div>");
 
             for(i=1; i<=response.data.results[i].rating; i++){
+              // prints a star for each rating number
               var star=$("<span>").html("&#9733;");
               row.append(star);
             }
