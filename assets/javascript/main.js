@@ -35,10 +35,55 @@ surfStorage.ref().on("child_added", function(newChild){
 	//getting our user input from firebase
 	var newLocation = newChild.val().location;
 	console.log(newLocation);
-	//appending the user input into the table
-	$("#timeInfoHere").append("<tr><td>" + newLocation + "</td></tr>");
 
 })
+
+var apiKey = "094f52c21f8d4c3dbff24712170903";
+
+        var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
+            url += "&q=" + weatherLatlng;
+            url += "&format=json";
+            url += "&key="+ apiKey;
+            url += "&includelocation=yes";
+            url += "&fx=" + "yes";
+        // console.log(url)
+        // url += "&callback=searchCallback";
+        console.log(weatherLatlng);
+
+        $.ajax({
+          // dataType: "jsonp",
+          url: url,
+          method: 'GET',
+          // success: searchCallback
+        }).done(function(dataSnap) {
+
+            var serverReq = dataSnap.data;
+            console.log(serverReq)
+
+            for (var i = 1; i < 7; i++) {
+
+              var weather = serverReq.current_condition[i].temp_F;
+              console.log(weather);
+              var weatherImg = serverReq.current_condition[i].weatherIconUrl[i].value;
+            }
+
+            $("#mainWeatherInfoHere").html(weatherImg);
+            $("#timeInfoHere").append("<tr><td>" + weather + "</td></tr>");
+            // var weeklyForecast = weather.date // write something to show weekly forcast
+
+            // var swell = weather.hourly[0].swellHeight_ft;
+            // console.log(swell);
+
+            // var iconURL = weather.hourly["0"].weatherIconUrl["0"].value;
+            // // .hourly["0"].weatherIconUrl["0"].value
+            // iconURL = iconURL.toString();
+            // console.log(iconURL)
+
+            // $("#weatherIcon").attr("src", iconURL);
+
+            // // $("#mainWeatherInfoHere").html(weatherIconUrl + " ");
+
+            // var maxTempF = weather.maxtempF;
 
 
 // //              YOUTUBE API INITIALIZATION
