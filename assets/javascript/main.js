@@ -3,58 +3,39 @@
 // //         KEY:   AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw
 // //              #userSearch is user input variable
 
-// After the API loads, call a function to enable the search box.
-function handleAPILoaded() {
-    $('#searchButton').attr('disabled', false);
-}
-
-// Search for a specified string.
-function search() {
-    var q = $('#user-search').val();
-    console.log("q: " + q);
-    var request = gapi.client.youtube.search.list({
-        q: q,
-        part: 'snippet'
-    });
-
-    request.execute(function(response) {
-        var str = JSON.stringify(response.result);
-        console.log("received from YouTube: " + str);
-        $('#weatherContainer').html('<pre>' + str + '</pre>');
-    });
-};
-
 // event listener to search YoutTube when user clicks search button
-$("#searchButton").on("click", function() {
-
-    // on click, the surfboard logo calls the SVG Animator library to animate it
-    new Vivus('animatedLogo', { duration: 100 });
-
-    var query = $('#user-search').val();
-    var key = "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
+$("#searchButton").on("click", function(){
 
 
-    var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + query + " beach" + "&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key=" + key;
+	// on click, the surfboard logo calls the SVG Animator library to animate it
+	new Vivus('animatedLogo', {duration: 100});
+
+	var query = $('#user-search').val();
+
+  // updates city name
+   $("#logoFont2").html(query);
+
+	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
+	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+query+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
+	
+	
+	
+	$.ajax({
+		url: queryURL,
+		method: "GET",
 
-    $.ajax({
-        url: queryURL,
-        method: "GET",
+	}).done(function(response) {
 
-    }).done(function(response) {
-
-
-        console.log(response);
-        var imageUrl = response.items[0].snippet.thumbnails.high.url;
-        var videoID = response.items[0].id.videoId;
-        console.log(imageUrl);
-        $("#weatherContainer").css('background-image', "url(" + imageUrl + ")");
-        $("#myVideo").attr("src", "https://youtube.com/embed/" + videoID + "?autoplay=1&controls=0&showinfo=0&autohide=1");
-    });
+		console.log(response);
+		var imageUrl= response.items[0].snippet.thumbnails.high.url;
+		var videoID= response.items[0].id.videoId;
+		console.log(imageUrl);
+		$("#weatherContainer").css('background-image', "url("+imageUrl+")");
+		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1");
+	});
 });
-
-
 
 
 //                          end YOUTUBE API
@@ -103,6 +84,7 @@ function initMap() {
         }, function(results, status) { //this anonymus function is called back when the results and status are received from geocode function 
             if (status == google.maps.GeocoderStatus.OK) {
                 userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
+                GetFoodPlaces(userLatLng);
             }
 
             //Request takes the userLatLng variable and hard coded radius, type
@@ -128,7 +110,7 @@ function initMap() {
     autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
-    geolocate()
+    geolocate();
 
 
     //*************************************************************** Add the give directions to the markers ***********************************************//    
@@ -179,7 +161,63 @@ function createMarker(place) {
             this.setAnimation(google.maps.Animation.BOUNCE);
         }
     });
+  };
 
+  function GetFoodPlaces(userLatLng){
+
+  var GPquery = $('#user-search').val();
+  var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
+
+  var foodLatLng = userLatLng.toString(); 
+  foodLatLng = foodLatLng.substring(1, foodLatLng.length -1);
+
+  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=4000&type=restaurant&key="+GPkey;
+  
+  
+      $.ajax({
+      method: "POST",
+      dataType: "json",
+      url: "https://proxy-cbc.herokuapp.com/proxy",
+      data: {
+        url: GPqueryURL
+      }
+    })
+    .done(function(response){
+      console.log("Google Places: ");
+      console.log(response);
+     
+
+      for (i=0; i< 5; i++){
+
+          var newDiv= $("<div class='foodPlace'>");
+          var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
+          var title=response.data.results[i].photos[0].html_attributions[0];
+          var br=$("<br>");
+          var row=$("<div>");
+
+            for(j=1; j<=response.data.results[i].rating; j++){
+              // prints a star for each rating number
+              var star=$("<span>").html("&#9733;");
+              row.append(star);
+            }
+
+          var open= "OPEN";
+          var closed= "CLOSED";
+          if (response.data.results[i].opening_hours.open_now === true) {
+            var openNow=$("<span class='openNow'>").html(open);
+          }
+          else{
+            var openNow=$("<span class='closedNow'>").html(closed);
+          }
+
+          newDiv.append(icon).append(title).append(br).append(row).append(openNow);
+          $("#FSResultsHere").append(newDiv).fadeIn('slow');
+
+
+
+      };
+
+    });
 
 };
 
@@ -199,9 +237,12 @@ function geolocate() {
             autocomplete.setBounds(circle.getBounds());
         });
     }
-};
+  };
+      
 
-
+$(window).ready(function(){
+  new Vivus('animatedMain', {duration: 100});
+});
 
 
 //Attach an event listener to search button and call the initMap function to update map location 
