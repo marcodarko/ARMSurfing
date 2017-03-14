@@ -1,5 +1,3 @@
-
-
 // //              YOUTUBE API INITIALIZATION
 //                 YOUTUBE  SEARCH FOR A KEYWORD
 // //         KEY:   AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw
@@ -7,202 +5,206 @@
 
 // After the API loads, call a function to enable the search box.
 function handleAPILoaded() {
-	$('#searchButton').attr('disabled', false);
+    $('#searchButton').attr('disabled', false);
 }
 
 // Search for a specified string.
 function search() {
-	var q = $('#user-search').val();
-	console.log("q: "+q);
-	var request = gapi.client.youtube.search.list({
-		q: q,
-		part: 'snippet'
-	});
+    var q = $('#user-search').val();
+    console.log("q: " + q);
+    var request = gapi.client.youtube.search.list({
+        q: q,
+        part: 'snippet'
+    });
 
-	request.execute(function(response) {
-		var str = JSON.stringify(response.result);
-		console.log("received from YouTube: "+str);
-		$('#weatherContainer').html('<pre>' + str + '</pre>');
-	});
+    request.execute(function(response) {
+        var str = JSON.stringify(response.result);
+        console.log("received from YouTube: " + str);
+        $('#weatherContainer').html('<pre>' + str + '</pre>');
+    });
 };
 
 // event listener to search YoutTube when user clicks search button
-$("#searchButton").on("click", function(){
+$("#searchButton").on("click", function() {
 
-	// on click, the surfboard logo calls the SVG Animator library to animate it
-	new Vivus('animatedLogo', {duration: 100});
+    // on click, the surfboard logo calls the SVG Animator library to animate it
+    new Vivus('animatedLogo', { duration: 100 });
 
-	var query = $('#user-search').val();
-	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
+    var query = $('#user-search').val();
+    var key = "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
-	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+query+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
-	
-	
-	
-	$.ajax({
-		url: queryURL,
-		method: "GET",
+    var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + query + " beach" + "&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key=" + key;
 
-	}).done(function(response) {
 
-		console.log(response);
-		var imageUrl= response.items[0].snippet.thumbnails.high.url;
-		var videoID= response.items[0].id.videoId;
-		console.log(imageUrl);
-		$("#weatherContainer").css('background-image', "url("+imageUrl+")");
-		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1");
-	});
+
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+
+    }).done(function(response) {
+
+
+        console.log(response);
+        var imageUrl = response.items[0].snippet.thumbnails.high.url;
+        var videoID = response.items[0].id.videoId;
+        console.log(imageUrl);
+        $("#weatherContainer").css('background-image', "url(" + imageUrl + ")");
+        $("#myVideo").attr("src", "https://youtube.com/embed/" + videoID + "?autoplay=1&controls=0&showinfo=0&autohide=1");
+    });
 });
+
+
 
 
 //                          end YOUTUBE API
 
 
-   // ************************************** Google api **************************************************//
+//********************************************************* Google API usage begins *******************************************************************//
 
-   var userSearch;
-   var map, geocoder, infowindow, markers = [],
-   marker;
-   var request = {};
-   var userLatLng;
-   //function to initalize the map this is initially called from the html via parameter callback=initMap
-   function initMap() {
+var userSearch;
+var map, geocoder, infowindow, marker;
+var request = {};
+var userLatLng;
+//function to initalize the map this is initially called from the html via parameter callback=initMap
+function initMap() {
 
-       // Clear out the old markers.
-       // markers.forEach(function(marker) {
-       //     marker.setMap(null);
-       // });
-       // markers = [];
+    //********************************************** Create the map and center it initially to San Diego **************************************************//
+    if ($("#user-search").val() == "") {
+        userSearch = "San Diego";
+    } else {
+        userSearch = $("#user-search").val();
+    }
 
+    map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12, scrollwheel: false });
 
-       if ($("#user-search").val() == "") {
-       	userSearch = "San Diego";
-       } else {
-       	userSearch = $("#user-search").val();
-       }
+    geocoder = new google.maps.Geocoder;
+    geocoder.geocode({ 'address': userSearch }, function(results, status) {
+        console.log(status);
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            // new google.maps.Marker({
+            //     map: map,
+            //     position: results[0].geometry.location
+            // });
+        } else {
+            window.alert('Geocode was not successful for the following reason: ' +
+                status);
+        }
+    });
 
-       map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12 });
-       console.log(map);
+    //******************************************************** Create surf related markers on the Map  ****************************************************//
 
-       geocoder = new google.maps.Geocoder;
-       geocoder.geocode({ 'address': userSearch }, function(results, status) {
-       	console.log(status);
-       	if (status === 'OK') {
-       		map.setCenter(results[0].geometry.location);
-               // new google.maps.Marker({
-               //     map: map,
-               //     position: results[0].geometry.location
-               // });
-           } else {
-           	window.alert('Geocode was not successful for the following reason: ' +
-           		status);
-           }
-       });
+    //create markers only when there is a user search
+    if ($("#user-search").val() !== "") {
+        //function to create the markers on the map 
+        geocoder.geocode({
+            'address': userSearch
+        }, function(results, status) { //this anonymus function is called back when the results and status are received from geocode function 
+            if (status == google.maps.GeocoderStatus.OK) {
+                userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
+            }
 
-       //variable to store the latitude and longitude
-       userLatLng;
+            //Request takes the userLatLng variable and hard coded radius, type
+            request = {
+                location: userLatLng,
+                radius: '2000',
+                keyword: 'surf spot'
+            };
+            infowindow = new google.maps.InfoWindow(); // create a new info window for the marker
+            service = new google.maps.places.PlacesService(map); // create a new service object which will be used to call the nearbySearch method
+            service.nearbySearch(request, callback); // use the nearbySearch method to find the places based on the userSearch and to create the markers
 
-       //create markers only when there is a user search
-       if ($("#user-search").val() !== "") {
-           //function to create the markers on the map 
-           geocoder.geocode({
-           	'address': userSearch
-           }, function(results, status) { //this anonymus function is called back when the results and status are received from geocode function 
-           	if (status == google.maps.GeocoderStatus.OK) {
-                   userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
-               }
+        });
 
-               //Request takes the userLatLng variable and hard coded radius, type
-               request = {
-               	location: userLatLng,
-               	radius: '2000',
-               	keyword: 'surf'
-               };
-               infowindow = new google.maps.InfoWindow(); // create a new info window for the marker
-               service = new google.maps.places.PlacesService(map); // create a new service object which will be used to call the nearbySearch method
-               service.nearbySearch(request, callback); // use the nearbySearch method to find the places based on the userSearch and to create the markers with the callback function
+    }
+    //************************************************************** Adding autocomplete search ************************************************************//
+    //get the input field ans assign it to the input variable 
+    var input = document.getElementById('user-search');
+    var options = {
+        types: ['establishment']
+    };
 
-           });
-
-       }
-
+    autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
-
-   };
-
-   //function used to dinamically create the markers
-   function callback(results, status) {
-   	if (status === google.maps.places.PlacesServiceStatus.OK) {
-   		for (var i = 0; i < results.length; i++) {
-               createMarker(results[i]); // call the createMarker function 
-               markers.push(createMarker(results[i])); //push the marker into the global variable markers array
-               console.log(markers);
-               console.log(marker);
-           }
-       }
-   }
-   //function to create marker 
-   function createMarker(place) {
-   	var placeLoc = place.geometry.location;
-   	marker = new google.maps.Marker({
-   		map: map,
-   		position: place.geometry.location
-   	});
-
-       //Add an event lilstener to the markers so when they are clicked the info window is displayed
-       google.maps.event.addListener(marker, 'click', function() {
-       	infowindow.setContent('<div><strong>' + place.name + '</strong></div>');
-       	infowindow.open(map, this);
-       });
-
-       return marker;
-   }
+    geolocate()
 
 
-   //Attach an event listener to search button and call the initMap function to update map location 
-   $("#searchButton").on('click', initMap);
+    //*************************************************************** Add the give directions to the markers ***********************************************//    
+
+    $.ajax({
+            method: "POST",
+            dataType: "json",
+            url: "https://proxy-cbc.herokuapp.com/proxy",
+            data: {
+                url: "https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA&key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA"
+            }
+        })
+        .done(function(response) {
+            console.log(response);
+        });
 
 
+}; //End of initMap function *******
+
+//************************************************************** Other functions used by initMap *******************************************************//
+//function used to dinamically create the markers
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]); // call the createMarker function 
+        }
+    }
+}
+//function to create marker 
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+    });
+
+    //Add an event lilstener to the markers so when they are clicked the info window is displayed
+    google.maps.event.addListener(marker, 'click', function() {
+        var service = new google.maps.places.PlacesService(map);
+        var request = { reference: place.reference };
+        service.getDetails(request, function(details, status) {
+            infowindow.setContent("<strong>" + details.name + "<strong>" + "<br />" + details.formatted_address + "<br />" + "<a href=" + details.website + ">"+ details.website + "</a>" + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
+        });
+        infowindow.open(map, this);
+        if (this.getAnimation() !== null) {
+            this.setAnimation(null);
+        } else {
+            this.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    });
 
 
-// ++++++++++++++++++++  FourSquare API  +++++++++++++++++++++++
+};
 
-// KEY  R2UJNZQ3DNIZJURTV3NZPVAK1QZMZU3NCSSTNLFIZALRUYHX
-
-//  SECRET  KDRSTNCB1QYNSGUWJQLVO5N2V5NDBOUVXMG4W4GZ3GEDDCUH
-
-
-$("#searchButton").on("click", function(){
-
-	var query = $('#user-search').val();
-	var FSkey= "R2UJNZQ3DNIZJURTV3NZPVAK1QZMZU3NCSSTNLFIZALRUYHX";
-	var FSsecret= "KDRSTNCB1QYNSGUWJQLVO5N2V5NDBOUVXMG4W4GZ3GEDDCUH";
-
-
-	var queryURL="https://api.foursquare.com/v2/venues/search?near="+query+"&limit=5&client_id="+FSkey+"&client_secret="+FSsecret+"&v=20170101"
-	
-	
-	
-	$.ajax({
-		url: queryURL,
-		method: "GET",
-		beforeSend: function(){
-			$("YelpResultsHere").html("<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>");
-		}
-
-	}).done(function(response) {
-
-		console.log(response);
-		
-		
-	});
-});
-
-
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+                center: geolocation,
+                radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+        });
+    }
+};
 
 
 
 
+//Attach an event listener to search button and call the initMap function to update map location 
+$("#searchButton").on('click', initMap);
 
+//************************************************************** End of Google Maps Api usage *************************************************************//
