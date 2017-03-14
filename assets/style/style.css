@@ -139,7 +139,7 @@ html, body{
 }
 
 
-#dayInfoBox{
+.dayInfoBox{
 	min-height: 300px;
 	color: white;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.78+0,0+55 */
@@ -150,7 +150,7 @@ html, body{
 
 }
 
-#dayInfoBox thead td{
+.dayInfoBox thead td{
 	font-weight: bold;
 	color: #22b8ff;
 }
@@ -264,4 +264,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d3d8ed', end
 	border-radius: 50% ;
 	width: 50%;
 	height: auto;
+}
+#myChart {
+	min-height: 400;
+	width: 100%;
 }

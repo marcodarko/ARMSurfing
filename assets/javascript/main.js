@@ -69,9 +69,13 @@ function initMap() {
     //********************************************** Create the map and center it initially to San Diego **************************************************//
     if ($("#user-search").val() == "") {
         userSearch = "San Diego";
+        console.log(userSearch);
+        $("#logoFont2").html(userSearch);
     } else {
         userSearch = $("#user-search").val();
-    }
+        console.log(userSearch);
+        $("#logoFont2").html(userSearch); //adds location to id logoFont2
+    } 
 
     map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12, scrollwheel: false });
 
@@ -225,6 +229,16 @@ var arrSwell = [];
 var arrSwellDir = [];
 var arrSwellPer = [];
 var arrTime = [];
+//current tide info
+var tideType;
+var tideTime;
+var tideHeight;
+//current astronomy data
+var moonrise;
+var moonset;
+var sunrise;
+var sunset;
+
 
 function worldWideWeather (userLatLng){
 
@@ -274,9 +288,34 @@ weatherLatlng = userLatLng.toString();
 
 			$("#timeInfoHere").empty();
 
+			//adds current astronomy data
+			var astronomy = weather.astronomy[0];
+				var moonrise = astronomy.moonrise;
+				var moonset = astronomy.moonrise;
+				var sunrise = astronomy.sunrise;
+				var sunset = astronomy.sunset;
+			$("#astronomyInfo").html("<tr><th>" + "Sunrise" + "</th><td>" + sunrise + "</td></tr>")
+							   .html("<tr><th>" + "Sunset" + "</th><td>" + sunset + "</td></tr>")
+							   .html("<tr><th>" + "Moonrise" + "</th><td>" + moonrise + "</td></tr>")
+							   .html("<tr><th>" + "Moonset" + "</th><td>" + moonset + "</td></tr>");
+
+			//add current tide info
+			var tideInfo = weather.tides[0];
+			for (var i = 0; i < 4; i++) {
+				//adds data to table for current tide information
+				tideType = tideInfo.tide_data[i].tide_type;
+				tideTime = tideInfo.tide_data[i].tideTime;
+				tideHeight = tideInfo.tide_data[i].tideHeight_mt;
+				$("#tideInfo").html("<tr><th>" + tideType + "</th><td>" + tideTime + "</td><td>" + tideHeight + " ft" + "</td></tr>")
+
+
+			};
+
+
+
 	    	for (i = 0; i < 24; i++) {
 	    		hourlyTempF = serverReq.weather[0].hourly[i].tempF;
-	    		console.log(hourlyTempF, ",");
+	    		// console.log(hourlyTempF, ",");
 	    		iconURL = serverReq.weather[0].hourly[i].weatherIconUrl[0].value
 	    			//maybe set an arr for the icons to use for graph come back to it
 	    		hourlySwell = serverReq.weather[0].hourly[i].swellHeight_ft;
@@ -291,9 +330,9 @@ weatherLatlng = userLatLng.toString();
 	    			arrTime.push(hourlyTime);
 	    		// var hourlyTime = moment(serverReq.weather[i].hourly[0].time).format("hh:mm A");
 
-	    		console.log("Time: " + hourlyTime);
+	    		// console.log("Time: " + hourlyTime);
 
-	    		$("#timeInfoHere").append("<tr><td>" + hourlyTime + "</td><td>" + "<img src='" + iconURL + "' class='img-responsive d-inline weatherIcon'> " + hourlyTempF + " &deg;F" + "</td><td>" + hourlySwell + " ft." + "</td><td>" + hourlySwellDir + "</td><td>" + hourlySwellPer + " secs" + "</td><td>" + hourlyWaterTemp + " &deg;F" + "</td></tr>");
+	    		// $("#timeInfoHere").append("<tr><td>" + hourlyTime + "</td><td>" + "<img src='" + iconURL + "' class='img-responsive d-inline weatherIcon'> " + hourlyTempF + " &deg;F" + "</td><td>" + hourlySwell + " ft." + "</td><td>" + hourlySwellDir + "</td><td>" + hourlySwellPer + " secs" + "</td><td>" + hourlyWaterTemp + " &deg;F" + "</td></tr>");
 
 	    		
 	    	}
