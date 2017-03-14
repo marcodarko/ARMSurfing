@@ -162,14 +162,12 @@ function createMarker(place) {
         position: place.geometry.location
     });
 
-
-
     //Add an event lilstener to the markers so when they are clicked the info window is displayed
     google.maps.event.addListener(marker, 'click', function() {
         var service = new google.maps.places.PlacesService(map);
         var request = { reference: place.reference };
         service.getDetails(request, function(details, status) {
-            infowindow.setContent(details.name + "<br />" + details.formatted_address + "<br />" + details.website + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
+            infowindow.setContent("<strong>" + details.name + "<strong>" + "<br />" + details.formatted_address + "<br />" + "<a href=" + details.website + ">"+ details.website + "</a>" + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
         });
         infowindow.open(map, this);
         if (this.getAnimation() !== null) {
