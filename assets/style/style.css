@@ -166,6 +166,86 @@ html, body{
 
 }
 
+#FourSquareBox{
+	margin:0;
+	padding: 0;
+	border-bottom: 6px white solid;
+}
+
+#FSTitle{
+
+	font-family: myFirstFont;
+	min-height: 150px;
+	margin:0;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6b6e75+0,2a2d2d+50,0a0e0a+51,0a0809+100 */
+	background: rgb(107,110,117); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(107,110,117,1) 0%, rgba(42,45,45,1) 50%, rgba(10,14,10,1) 51%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(107,110,117,1) 0%,rgba(42,45,45,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6e75', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+	color: white;
+	padding: 30px;
+	text-align: center;
+}
+
+#FSResultsHere{
+	margin:0;
+	min-height: 150px;
+	background-color: hotpink;
+	text-align: center;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.foodPlace{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2dfed+0,c8d7eb+26,bed0ea+51,a6c0e3+51,afc7e8+62,bad0ef+75,99b5db+88,799bc8+100;Grey+Blue+Gloss+%231 */
+	background: rgb(210,223,237); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(210,223,237,1) 0%, rgba(200,215,235,1) 26%, rgba(190,208,234,1) 51%, rgba(166,192,227,1) 51%, rgba(175,199,232,1) 62%, rgba(186,208,239,1) 75%, rgba(153,181,219,1) 88%, rgba(121,155,200,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(210,223,237,1) 0%,rgba(200,215,235,1) 26%,rgba(190,208,234,1) 51%,rgba(166,192,227,1) 51%,rgba(175,199,232,1) 62%,rgba(186,208,239,1) 75%,rgba(153,181,219,1) 88%,rgba(121,155,200,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(210,223,237,1) 0%,rgba(200,215,235,1) 26%,rgba(190,208,234,1) 51%,rgba(166,192,227,1) 51%,rgba(175,199,232,1) 62%,rgba(186,208,239,1) 75%,rgba(153,181,219,1) 88%,rgba(121,155,200,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2dfed', endColorstr='#799bc8',GradientType=0 ); /* IE6-9 */
+	flex:1;
+	color: white;
+	border-radius: 20px;
+	padding: 10px;
+	margin:10px;
+	box-shadow: 4px 2px 0px #ce2cad;
+
+}
+
+.foodPlace:hover{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d3d8ed+1,cbd4ed+26,bed0ea+51,abb6e8+51,aeb6e5+62,bab8ed+76,9da2e0+88,9581d3+100 */
+background: rgb(211,216,237); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(211,216,237,1) 1%, rgba(203,212,237,1) 26%, rgba(190,208,234,1) 51%, rgba(171,182,232,1) 51%, rgba(174,182,229,1) 62%, rgba(186,184,237,1) 76%, rgba(157,162,224,1) 88%, rgba(149,129,211,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(211,216,237,1) 1%,rgba(203,212,237,1) 26%,rgba(190,208,234,1) 51%,rgba(171,182,232,1) 51%,rgba(174,182,229,1) 62%,rgba(186,184,237,1) 76%,rgba(157,162,224,1) 88%,rgba(149,129,211,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(211,216,237,1) 1%,rgba(203,212,237,1) 26%,rgba(190,208,234,1) 51%,rgba(171,182,232,1) 51%,rgba(174,182,229,1) 62%,rgba(186,184,237,1) 76%,rgba(157,162,224,1) 88%,rgba(149,129,211,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d3d8ed', endColorstr='#9581d3',GradientType=0 ); /* IE6-9 */
+
+}
+
+.foodPlace img{
+	width: 30px;
+}
+
+.foodPlace a{
+	text-decoration: none;
+	font-family: sans-serif;
+	color: navy;
+	margin:5px 0px;
+}
+
+.openNow{
+	color: #d2ffc0;
+	text-shadow: 0px 0px 5px #1bff37;
+}
+
+.closedNow{
+	color: #ffb9ca;
+	text-shadow: 0px 0px 5px #fc3131;
+}
+
 .myFooter{
 	text-align: center;
 	padding: 30px;
@@ -179,4 +259,9 @@ html, body{
 	-o-animation: AnimationName 21s ease infinite;
 	animation: AnimationName 21s ease infinite;
 
+}
+.weatherIcon {
+	border-radius: 50% ;
+	width: 50%;
+	height: auto;
 }
