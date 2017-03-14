@@ -97,7 +97,7 @@ function initMap() {
     //******************************************************** Create surf related markers on the Map  ****************************************************//
 
     //create markers only when there is a user search
-    if ($("#user-search").val() !== "") {
+   
         //function to create the markers on the map 
         geocoder.geocode({
             'address': userSearch
@@ -120,7 +120,7 @@ function initMap() {
 
         });
 
-    }
+    
     //************************************************************** Adding autocomplete search ************************************************************//
     //get the input field ans assign it to the input variable 
     var input = document.getElementById('user-search');
@@ -208,7 +208,23 @@ function geolocate() {
 
 //====================================================================================
 //---------------------------world wide weather online--------------------------------
-//***********************Global Variables for World Weather***************************
+//--------------------------------Local-----------------------------------------------
+// var localAPIKey = "094f52c21f8d4c3dbff24712170903";
+// var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
+// 	url += "&q=" + userSearch;
+//     url += "&format=json";
+//     url += "&key="+ localAPIKey;
+//     url += "&includelocation=yes";
+//     url += "&fx=" + "yes";
+// 	$.ajax({
+// 	      url: url,
+// 	      method: 'GET',
+// 	    }).done(function(data) {
+// 	    	console.log(data)
+// 	    });
+//---------------------------end of local----------------------------------------------
+
+//***********************Global Variables for World Weather-Marine***************************
 var weatherLatlng; //Set global variable weatherLatlng from google api to use for query on worldwide weather api
 var serverReq;
 var weather;
@@ -219,11 +235,14 @@ var tempF;
 var currentTime;
 var hourlyTempF;
 //forloop globals
+
 var hourlySwell;
 var hourlySwellDir;
 var hourlySwellPer;
 var hourlyTime;
 //arrays to hold data for graph
+var weeklyForecast = []; //to make it an array of arrays [][]
+var arrForecast = [];
 var arrWaterTemp = [];
 var arrSwell = [];
 var arrSwellDir = [];
@@ -255,7 +274,7 @@ weatherLatlng = userLatLng.toString();
 		    url += "&key="+ apiKey;
 		    url += "&includelocation=yes";
 		    url += "&tide=yes";
-		    url += "&tp=1";
+		    url += "&tp=6";
 		    url += "&fx=" + "yes";
 	    console.log(weatherLatlng);
 
@@ -312,33 +331,53 @@ weatherLatlng = userLatLng.toString();
 			};
 
 
+	    	// for (y = 0; y < 7; y++) {
+	    	// 	weeklyForecast = serverReq.weather[y];
+	    	// 	console.log(weeklyForecast);
+	    	// 		arrForecast.push(weeklyForecast);
+	    		// hourlyTempF = serverReq.weather[y].hourly[i].tempF;
+	    		// // console.log(hourlyTempF, ",");
+	    		// iconURL = serverReq.weather[y].hourly[i].weatherIconUrl[0].value
+	    		// 	//maybe set an arr for the icons to use for graph come back to it
+	    		// hourlySwell = serverReq.weather[y].hourly[i].swellHeight_ft;
+	    		// 	arrSwell.push(hourlySwell);
+	    		// hourlySwellDir = serverReq.weather[0].hourly[i].swellDir16Point;
+	    		// 	arrSwellDir.push(hourlySwellDir);
+	    		// hourlySwellPer = serverReq.weather[0].hourly[i].swellPeriod_secs;
+	    		// 	arrSwellPer.push(hourlySwellPer);
+	    		// hourlyWaterTemp = serverReq.weather[0].hourly[i].waterTemp_F;
+	    		// 	arrWaterTemp.push(hourlyWaterTemp);
+	    		// hourlyTime = serverReq.weather[0].hourly[i].time;
+	    		// 	arrTime.push(hourlyTime);
 
-	    	for (i = 0; i < 24; i++) {
-	    		hourlyTempF = serverReq.weather[0].hourly[i].tempF;
-	    		// console.log(hourlyTempF, ",");
-	    		iconURL = serverReq.weather[0].hourly[i].weatherIconUrl[0].value
-	    			//maybe set an arr for the icons to use for graph come back to it
-	    		hourlySwell = serverReq.weather[0].hourly[i].swellHeight_ft;
-	    			arrSwell.push(hourlySwell);
-	    		hourlySwellDir = serverReq.weather[0].hourly[i].swellDir16Point;
-	    			arrSwellDir.push(hourlySwellDir);
-	    		hourlySwellPer = serverReq.weather[0].hourly[i].swellPeriod_secs;
-	    			arrSwellPer.push(hourlySwellPer);
-	    		hourlyWaterTemp = serverReq.weather[0].hourly[i].waterTemp_F;
-	    			arrWaterTemp.push(hourlyWaterTemp);
-	    		hourlyTime = serverReq.weather[0].hourly[i].time;
-	    			arrTime.push(hourlyTime);
-	    		// var hourlyTime = moment(serverReq.weather[i].hourly[0].time).format("hh:mm A");
+		    	for (i = 0; i < 4; i++) {
+		    		hourlyTempF = serverReq.weather[0].hourly[i].tempF;
+		    		// console.log(hourlyTempF, ",");
+		    		// iconURL = serverReq.weather[0].weatherIconUrl[i].value;
+		    			//maybe set an arr for the icons to use for graph come back to it
+		    		hourlySwell = serverReq.weather[0].hourly[i].swellHeight_ft;
+		    			arrSwell.push(hourlySwell);
+		    		hourlySwellDir = serverReq.weather[0].hourly[i].swellDir16Point;
+		    			arrSwellDir.push(hourlySwellDir);
+		    		hourlySwellPer = serverReq.weather[0].hourly[i].swellPeriod_secs;
+		    			arrSwellPer.push(hourlySwellPer);
+		    		hourlyWaterTemp = serverReq.weather[0].hourly[i].waterTemp_F;
+		    			arrWaterTemp.push(hourlyWaterTemp);
+		    		hourlyTime = serverReq.weather[0].hourly[i].time;
+		    			arrTime.push(hourlyTime);
+		    	// 	// var hourlyTime = moment(serverReq.weather[i].hourly[0].time).format("hh:mm A");
 
-	    		// console.log("Time: " + hourlyTime);
+		    	// 	// console.log("Time: " + hourlyTime);
 
-	    		// $("#timeInfoHere").append("<tr><td>" + hourlyTime + "</td><td>" + "<img src='" + iconURL + "' class='img-responsive d-inline weatherIcon'> " + hourlyTempF + " &deg;F" + "</td><td>" + hourlySwell + " ft." + "</td><td>" + hourlySwellDir + "</td><td>" + hourlySwellPer + " secs" + "</td><td>" + hourlyWaterTemp + " &deg;F" + "</td></tr>");
+		    	// 	// $("#timeInfoHere").append("<tr><td>" + hourlyTime + "</td><td>" + "<img src='" + iconURL + "' class='img-responsive d-inline weatherIcon'> " + hourlyTempF + " &deg;F" + "</td><td>" + hourlySwell + " ft." + "</td><td>" + hourlySwellDir + "</td><td>" + hourlySwellPer + " secs" + "</td><td>" + hourlyWaterTemp + " &deg;F" + "</td></tr>");
 
-	    		
-	    	}
+		    		
+		    	// };
+		    };
 
 	    }); 
 	    //arrays for to use data for chart.js
+	    console.log(arrForecast);
 	    console.log(arrWaterTemp);
 	    console.log(arrTime);
 	    console.log(arrSwellPer);
@@ -353,9 +392,9 @@ var ctx = $("#myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["3AM", "6AM", "Noon", "6PM", "9PM", "12AM"],
+        labels: ["6AM", "Noon", "6PM", "12AM"],
         datasets: [{
-            label: '# of Votes',
+            label: 'Max Surf in ft',
             data: arrSwell,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -373,7 +412,7 @@ var myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 2
         }]
     },
     options: {
