@@ -242,6 +242,23 @@ function geolocate() {
 
 $(window).ready(function(){
   new Vivus('animatedMain', {duration: 100});
+
+notie.input({
+  text: 'Do you want to receive surf updates:',
+  submitText: 'Submit',
+  cancelText: 'Nah, bro',
+  cancelCallback: function (value) {
+    notie.alert({ type: 3, text: 'No problem, enjoy!'  });
+    //database.push(value);
+  },
+  submitCallback: function (value) {
+    notie.alert({ type: 1, text: 'You entered: ' + value+".  We'll keep you updated!" })
+  },
+  value: '',
+  type: 'email',
+  placeholder: 'name@example.com'
+})
+
 });
 
 
