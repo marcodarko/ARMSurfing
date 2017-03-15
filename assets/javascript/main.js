@@ -13,12 +13,21 @@ $("#searchButton").on("click", function(){
 	var query = $('#user-search').val();
 
   // updates city name
-   $("#logoFont2").html(query);
+  var shortQuery = [];
+  for (var i= 0; i < query.length; i++)
+    if(query[i] == ","){
+        break
+    }else{
+        shortQuery.push(query[i]);
+    }
+   $("#logoFont2").html(shortQuery);
+
+   shortQuery = shortQuery.join('');
 
 	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
-	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+query+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
+	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+shortQuery+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
 	
 	
 	
@@ -165,6 +174,8 @@ function createMarker(place) {
 
   function GetFoodPlaces(userLatLng){
 
+    $("#FSResultsHere").empty();
+
   var GPquery = $('#user-search').val();
   var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
 
@@ -192,12 +203,13 @@ function createMarker(place) {
           var newDiv= $("<div class='foodPlace'>");
           var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
           var title=response.data.results[i].photos[0].html_attributions[0];
+          $(title).attr("target", "_blank");
           var br=$("<br>");
           var row=$("<div>");
 
             for(j=1; j<=response.data.results[i].rating; j++){
               // prints a star for each rating number
-              var star=$("<span>").html("&#9733;");
+              var star=$("<span class='stars'>").html("&#9733;");
               row.append(star);
             }
 
@@ -216,6 +228,10 @@ function createMarker(place) {
 
 
       };
+
+    }).fail(function(){
+
+      notie.alert({ type: 1, text: 'Boo! No food around here..', position: 'bottom' })
 
     });
 
@@ -241,7 +257,6 @@ function geolocate() {
       
 
 $(window).ready(function(){
-  new Vivus('animatedMain', {duration: 100});
 
 notie.input({
   text: 'Do you want to receive surf updates:',
@@ -249,10 +264,12 @@ notie.input({
   cancelText: 'Nah, bro',
   cancelCallback: function (value) {
     notie.alert({ type: 3, text: 'No problem, enjoy!'  });
+     new Vivus('animatedMain', {duration: 100});
     //database.push(value);
   },
   submitCallback: function (value) {
-    notie.alert({ type: 1, text: 'You entered: ' + value+".  We'll keep you updated!" })
+    notie.alert({ type: 1, text: 'You entered: ' + value+".  We'll keep you updated!" });
+    new Vivus('animatedMain', {duration: 100});
   },
   value: '',
   type: 'email',

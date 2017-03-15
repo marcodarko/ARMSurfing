@@ -75,6 +75,7 @@ html, body{
 
 #logoFont2{
 	font-family: myFirstFont;
+	font-size: 2em;
 }
 
 
@@ -254,6 +255,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', end
 .closedNow{
 	color: #ffb9ca;
 	text-shadow: 0px 0px 5px #fc3131;
+}
+
+.stars{
+
+	color:#ffcc00 ;
+	text-shadow: 1px 1px 0px #4b6886;
 }
 
 #bottomHeroBox{
