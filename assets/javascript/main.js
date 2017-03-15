@@ -106,8 +106,6 @@ function initMap() {
                 userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
               	localWWAPI(userLatLng);
               	worldWideWeather(userLatLng);
-
-                   console.log(userLatLng.lat())
             }
 
             //Request takes the userLatLng variable and hard coded radius, type
@@ -209,12 +207,15 @@ function geolocate() {
 
 
 //====================================================================================
-//---------------------------world wide weather online--------------------------------
-//--------------------------------Local-----------------------------------------------
+
+//***************************world wide weather online********************************
+//--------------------------------Local begin-----------------------------------------
 function localWWAPI (userLatLng){
+//Variable weatherLatlng for wwwAPI, passing userLatLng from google API, as wwwAPI only accepts lat,lng 
 weatherLatlng = userLatLng.toString();
        weatherLatlng = weatherLatlng.substring(1, weatherLatlng.length -1);
-       console.log(weatherLatlng);
+
+//end point for wwwAPI
 var apiKey = "094f52c21f8d4c3dbff24712170903";
 var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
            url += "&q=" + weatherLatlng;
@@ -224,24 +225,17 @@ var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
            url += "&fx=" + "yes";
 
        $.ajax({
-         // dataType: "jsonp",
          url: url,
          method: 'GET',
-         // success: searchCallback
        }).done(function(dataSnap) {
 
-           var serverReq = dataSnap.data;
-           console.log(serverReq)
-
+            var serverReq = dataSnap.data;
     		var currentTemp = serverReq.current_condition[0].temp_F;
     		var weatherIcon = serverReq.current_condition[0].weatherIconUrl[0].value;
     		var feelsLike = serverReq.current_condition[0].FeelsLikeF;
     		var humidity = serverReq.current_condition[0].humidity;
     		var windSpeed = serverReq.current_condition[0].windspeedMiles;
 
-    		console.log(weatherIcon);
-    		
-    		console.log(currentTemp);
 
            $("#weatherIcon").attr("src", weatherIcon).css("border-radius", "100%");
            $(".tempF").html(currentTemp + " &deg;F");
@@ -252,7 +246,7 @@ var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
 }
 //---------------------------end of local----------------------------------------------
 
-//***********************Global Variables for World Weather-Marine***************************
+//***********************Global Variables for World Weather-Marine BEGIN************************************
 var weatherLatlng; //Set global variable weatherLatlng from google api to use for query on worldwide weather api
 var serverReq;
 var weather;
@@ -336,7 +330,6 @@ function worldWideWeather (userLatLng){
 //convert function to string to use coordinates as api only accepts lat, long
 weatherLatlng = userLatLng.toString();
            weatherLatlng = weatherLatlng.substring(1, weatherLatlng.length -1);
-           console.log(weatherLatlng);
 
         //variables for api and add parameters to var url to get data for UI
         var apiKey = "094f52c21f8d4c3dbff24712170903";
@@ -348,7 +341,6 @@ weatherLatlng = userLatLng.toString();
 		    url += "&tide=yes";
 		    url += "&tp=6";
 		    url += "&fx=" + "yes";
-	    console.log(weatherLatlng);
 
 	    $.ajax({
 	      url: url,
@@ -356,14 +348,11 @@ weatherLatlng = userLatLng.toString();
 	    }).done(function(data) {
 	    	//
 	    	serverReq = data.data;
-	    	console.log(serverReq);
 	    	weather = serverReq.weather[0];
 
 	    	swell = weather.hourly["0"].swellHeight_ft;
-	    	console.log(swell);
 
 	    	iconURL = serverReq.weather[0].hourly["0"].weatherIconUrl["0"].value;
-	    	console.log(iconURL)
 
 			$("#astronomyInfo").empty();
 			$("#tideInfo").empty();
@@ -403,7 +392,8 @@ weatherLatlng = userLatLng.toString();
 	    			arrDate3.push(moment(date4).format("dd M/D"));
 	    		date5 = serverReq.weather[4].date;
 	    			arrDate4.push(moment(date5).format("dd M/D"));
-	    		console.log(date);
+
+	    	//SET OF FOR LOOPS TO PLOT DATA IN CHART.JS
 		    	for (i = 0; i < 4; i++) {
 		
 		    		hourlyTempF = serverReq.weather[0].hourly[i].tempF;
@@ -462,7 +452,6 @@ weatherLatlng = userLatLng.toString();
 		    	};
 		    	for (i = 0; i < 4; i++) {
 		    		hourlyTempF = serverReq.weather[4].hourly[i].tempF;
-		    
 		    		hourlySwell = serverReq.weather[4].hourly[i].swellHeight_ft;
 		    			arrSwell5.push(hourlySwell);
 		    		hourlySwellDir = serverReq.weather[4].hourly[i].swellDir16Point;
@@ -476,17 +465,14 @@ weatherLatlng = userLatLng.toString();
 		    	};
 
 	    }); 
-	    //arrays for to use data for chart.js
-	    console.log(arrForecast);
-	    console.log(arrWaterTemp);
-	    console.log(arrTime);
-	    console.log(arrSwellPer);
-	    console.log(arrSwellDir);
-	    console.log(arrSwell);
 
 }
+//***********************Global Variables for World Weather-Marine END************************************
+//***************************world wide weather online API END********************************
+
 //====================================================================================
-//********************************* Charts.js  ***************************************
+
+//********************************* Charts.js BEGIN ***************************************
 var ctx = $("#myChart"); 
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -594,6 +580,7 @@ var myChart = new Chart(ctx, {
 
     responsive: true,
 });
+//********************************* Charts.js END  ***************************************
 //====================================================================================
 
 //Attach an event listener to search button and call the initMap function to update map location 
