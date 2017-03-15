@@ -14,13 +14,18 @@ firebase.initializeApp(config);
 var surfStorage = firebase.database();
 //click event that will store our user's input into firebase
 $("#searchButton").on("click", function(){
-
-  alert("this works");
 	//grabbing user input 
 	var userInput = $("#user-search").val().trim();
+  // updates city name
+  var shortQuery = [];
+  for (var i= 0; i < userInput.length; i++)
+    if(userInput[i] == ","){
+        break
+    }else{
+        shortQuery.push(userInput[i]);
+    }
 	//object to store user input into firebase
 	var surfObj = {
-
 		location: userInput
 	};
 	
@@ -30,78 +35,28 @@ $("#searchButton").on("click", function(){
 	return false;
 });
 
-function showPreviousConditions() {
-  //getting the data attribute from our storedSearchBtn
-  var locationName = $(this).attr("data-location");
-  //passing our initMap function the name of the location that is stored in firebase
-  initMap(locationName);
-}
-
 surfStorage.ref().on("child_added", function(newChild){
   //checking our data we're receiving from firebase
   console.log(newChild);
+  //getting our user input from firebase
+  var newLocation = newChild.val().location;
   //creating a new button for user to check recently searched spot conditions
-  var storedSearchBtn = $("<button type='submit' value='View Report' class='btn btn-warning' id='firebaseBtn'>");
-	//getting our user input from firebase
-	var newLocation = newChild.val().location;
+  var storedSearchBtn = $("<button type='submit' class='recentButton' id='firebaseBtn'>").html(newLocation);
   //checking our new location
 	console.log(newLocation);
   //adding a data attribute to the button of newLocation
   storedSearchBtn.attr("data-location", newLocation);
   //appending user search and button to our firebaseTable
-  $("#firebaseTable").append("<tr><td>" + newLocation + "</td><td>" + recentlySearchedBtn + "</td></tr>");
+  $("#recentlySearchedResultsHere").append(storedSearchBtn);
   //creating an on click event which uses our showPreviousConditions function to display previous conditions
   storedSearchBtn.on("click", function(){
-
-    initMap(this.data("location"));
+    console.log($(this).attr("data-location"));
+    locationName = $(this).attr("data-location")
+    $("#logoFont2").html(locationName);
+    initMap();
   });
 
 });
-
-var apiKey = "094f52c21f8d4c3dbff24712170903";
-
-        var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
-            url += "&q=" + weatherLatlng;
-            url += "&format=json";
-            url += "&key="+ apiKey;
-            url += "&includelocation=yes";
-            url += "&fx=" + "yes";
-        // console.log(url)
-        // url += "&callback=searchCallback";
-        console.log(weatherLatlng);
-
-        $.ajax({
-          // dataType: "jsonp",
-          url: url,
-          method: 'GET',
-          // success: searchCallback
-        }).done(function(dataSnap) {
-
-            var serverReq = dataSnap.data;
-            console.log(serverReq)
-
-            for (var i = 1; i < 7; i++) {
-
-              var weather = serverReq.current_condition[i].temp_F;
-              console.log(weather);
-              var weatherImg = serverReq.current_condition[i].weatherIconUrl[i].value;
-            }
-
-            $("#mainWeatherInfoHere").html(weatherImg);
-            $("#timeInfoHere").append("<tr><td>" + weather + "</td></tr>");
-            // var weeklyForecast = weather.date // write something to show weekly forcast
-
-            // var swell = weather.hourly[0].swellHeight_ft;
-            // console.log(swell);
-
-            // var iconURL = weather.hourly["0"].weatherIconUrl["0"].value;
-            // // .hourly["0"].weatherIconUrl["0"].value
-            // iconURL = iconURL.toString();
-            // console.log(iconURL)
-
-            // $("#weatherIcon").attr("src", iconURL);
-
-            // // $("#mainWeatherInfoHere").html(weatherIconUrl + " ");
 
             // var maxTempF = weather.maxtempF;
 // //              YOUTUBE API INITIALIZATION
@@ -153,9 +108,9 @@ var userSearch;
 var map, geocoder, infowindow, marker;
 var request = {};
 var userLatLng;
+var locationName = "";
 //function to initalize the map this is initially called from the html via parameter callback=initMap
-function initMap(locationName) {
-
+function initMap() {  
     //********************************************** Create the map and center it initially to San Diego **************************************************//
     if (locationName == ""){
 
@@ -248,7 +203,7 @@ function callback(results, status) {
             createMarker(results[i]); // call the createMarker function 
         }
     }
-}
+};
 //function to create marker 
 function createMarker(place) {
     var placeLoc = place.geometry.location;
