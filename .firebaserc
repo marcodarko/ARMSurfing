@@ -1,6 +1,10 @@
 {
   "projects": {
+<<<<<<< HEAD
     "project1": "armsurfing-161002",
     "default": "armsurfing-161002"
+=======
+    "default": "armsurfing-9502f"
+>>>>>>> 0f444628f4fc3de5728a56b8c5791166da068fb1
   }
 }
