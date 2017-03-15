@@ -13,12 +13,23 @@ $("#searchButton").on("click", function(){
 	var query = $('#user-search').val();
 
   // updates city name
-   $("#logoFont2").html(query);
+  var shortQuery = [];
+  for (var i= 0; i < query.length; i++)
+    if(query[i] == ","){
+        break
+    }else{
+        shortQuery.push(query[i]);
+    }
+
+   $("#logoFont2").html(shortQuery);
+   
+   shortQuery = shortQuery.join('');
+   console.log(shortQuery);
 
 	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
-	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+query+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
+	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+shortQuery+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
 	
 	
 	
@@ -76,8 +87,7 @@ function initMap() {
 
     //******************************************************** Create surf related markers on the Map  ****************************************************//
 
-    //create markers only when there is a user search
-    if ($("#user-search").val() !== "") {
+ 
         //function to create the markers on the map 
         geocoder.geocode({
             'address': userSearch
@@ -99,7 +109,6 @@ function initMap() {
 
         });
 
-    }
     //************************************************************** Adding autocomplete search ************************************************************//
     //get the input field ans assign it to the input variable 
     var input = document.getElementById('user-search');
