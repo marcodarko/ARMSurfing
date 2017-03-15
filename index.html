@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- loads jquery -->
 	<script src="https://code.jquery.com/jquery.js"></script>
+	<!-- Charts.js CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<!-- Moment JS -->
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+
 
 	<!-- loads SVG animator -->
 	<script src="https://cdn.jsdelivr.net/vivus/latest/vivus.min.js"></script>
@@ -111,7 +116,10 @@
 		<div id="weatherContainer">
 
 			<div id="mainWeatherInfoHere">
-				<span>Temp: </span><span>85</span><br>
+			<img id="weatherIcon" src=>	<span>Temp: </span><span class="tempF"></span><br>
+			<span class="feelsLike"></span><br>
+			<span class="humidity"></span><br>
+			<span class="windSpeed"></span><br>
 			</div>
 
 		</div>
@@ -124,6 +132,7 @@
 	</div>
 
 
+		<h1 id="logoFont2"></h1>
 	</section> 
 
 	<section class="row col-lg-7 col-md-7 col-sm-12" id="detailsContainer">
@@ -131,29 +140,28 @@
 		
 	<!-- By Hour Information -->
 
+	<!-- Current Conditions & astronomy data -->
+	<div class="col-lg-8 col-md-8 col-sm-12 dayInfoBox">
 
-	<div id="dayInfoBox" class="col-lg-12 col-md-12 col-sm-12">
+		<table class="table" id="foreCastTable">
+			<tbody id="tideInfo">
+			<!-- tideInfo table -->
+			</tbody>
+		</table>
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-12 dayInfoBox">
 
-		<table class="table">
-			<thead>
-				<td>Desc 1</td>
-				<td>Desc 2</td>
-				<td>Desc 3</td>
-				<td>Desc 4</td>
-				<td>Desc 5</td>
-			</thead>
-			<tbody id="timeInfoHere">
-				<td>data1 </td>
-				<td>data2</td>
-				<td>data3</td>
-				<td>data4</td>
-				<td>data5</td>
+		<table class="table" id="foreCastTable2">
+			<tbody id="astronomyInfo">
+			<!-- astronomy table -->
+
 			</tbody>
 		</table>
 	</div>
 
-	<div id="videoBox" class="col-lg-12 col-md-12 col-sm-12">
-		VIDEO FEED
+	<!-- charts.js graphs, probably have more than one -->
+	<div id="chartJS" class="col-lg-12 col-md-12 col-sm-12">
+		<canvas id="myChart"></canvas>
 	</div>
 
 
@@ -179,6 +187,17 @@
 
 </section>
 
+<!-- FourSquare Box -->
+<section id="FourSquareBox" class="row col-lg-12 col-md-12 col-sm-12">
+
+	<div id="FSTitle" class="col-lg-2 col-md-2 col-sm-12">
+		<h1>Nearby</h1>
+	</div>
+	<div id="FSResultsHere" class="col-lg-10 col-md-10 col-sm-12">
+		
+	</div>
+
+</section>
 
 <!-- FOOTER -->
 <section class="myFooter  col-lg-12 col-md-12 col-sm-12">
