@@ -309,6 +309,7 @@ weatherLatlng = userLatLng.toString();
 
 			//add current tide info
 			var tideInfo = weather.tides[0];
+			console.log(weather);
 			for (var i = 0; i < 3; i++) {
 				//adds data to table for current tide information
 				tideType = tideInfo.tide_data[i].tide_type;
@@ -324,7 +325,7 @@ weatherLatlng = userLatLng.toString();
 			for (var i = 0; i < 5; i++){
 	    		date = serverReq.weather[i].date;
 	    			arrDate.push(moment(date).format("dd M/D"));
-	    	}; console.log(arrDate);
+	    	}; 
 
 	    	//SET OF FOR LOOPS TO PLOT DATA IN CHART.JS
 	    	//empty out arrSwell on every event
@@ -344,7 +345,7 @@ weatherLatlng = userLatLng.toString();
 							// arrWaterTemp.push(hourlyWaterTemp);
 						var hourlyTime = weather.hourly[ia].time;
 							// arrTime.push(hourlyTime);
-					}; console.log(arrSwell);
+					};
 				};
 		    	chartJS();
 
@@ -366,7 +367,7 @@ function chartJS(){
 		        labels: ["6AM", "Noon", "6PM", "12AM"],
 		        datasets: [{
 		            label: arrDate[0],
-		            data: arrSwell.slice(0, 3),
+		            data: arrSwell.slice(0, 4),
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',
 		                'rgba(255, 99, 132, 0.2)',
@@ -383,7 +384,7 @@ function chartJS(){
 		        },
 		        {
 		            label: arrDate[1],
-		            data: arrSwell.slice(4, 7),
+		            data: arrSwell.slice(4, 8),
 		            backgroundColor: [
 		                'rgba(54, 162, 235, 0.2)',
 		                'rgba(54, 162, 235, 0.2)',
@@ -400,7 +401,7 @@ function chartJS(){
 		        },
 		        {
 		            label: arrDate[2],
-		            data: arrSwell.slice(8, 11),
+		            data: arrSwell.slice(8, 12),
 		            backgroundColor: [
 		                'rgba(255, 206, 86, 0.2)',
 		                'rgba(255, 206, 86, 0.2)',
@@ -417,7 +418,7 @@ function chartJS(){
 		        },
 		        {
 		            label: arrDate[3],
-		            data: arrSwell.slice(12, 15),
+		            data: arrSwell.slice(12, 16),
 		            backgroundColor: [
 		                'rgba(75, 192, 192, 0.2)',
 		                'rgba(75, 192, 192, 0.2)',
@@ -434,7 +435,7 @@ function chartJS(){
 		        },
 		        {
 		            label: arrDate[4],
-		            data: arrSwell.slice(16, 19),
+		            data: arrSwell.slice(16, 20),
 		            backgroundColor: [
 		                'rgba(153, 102, 255, 0.2)',
 		                'rgba(153, 102, 255, 0.2)',
@@ -461,7 +462,7 @@ function chartJS(){
 		        			labelString: 'Max Surf in ft',
 		        		}
 		            }]
-		        }
+		        },
 		    },
 
 		    responsive: true,
