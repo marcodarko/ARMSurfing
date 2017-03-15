@@ -49,7 +49,6 @@ var request = {};
 var userLatLng;
 //function to initalize the map this is initially called from the html via parameter callback=initMap
 function initMap() {
-
     //********************************************** Create the map and center it initially to San Diego **************************************************//
     if ($("#user-search").val() == "") {
         userSearch = "San Diego";
@@ -85,6 +84,7 @@ function initMap() {
             if (status == google.maps.GeocoderStatus.OK) {
                 userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
               	localWWAPI(userLatLng);
+       
               	worldWideWeather(userLatLng);
                 GetFoodPlaces(userLatLng);
             }
@@ -98,7 +98,6 @@ function initMap() {
             infowindow = new google.maps.InfoWindow(); // create a new info window for the marker
             service = new google.maps.places.PlacesService(map); // create a new service object which will be used to call the nearbySearch method
             service.nearbySearch(request, callback); // use the nearbySearch method to find the places based on the userSearch and to create the markers
-
         });
 
     //************************************************************** Adding autocomplete search ************************************************************//
@@ -246,18 +245,6 @@ var weeklyForecast = []; //to make it an array of arrays [][]
 var date;
 var arrDate = [];
 
-var date1;
-var arrDate1 = [];
-
-var date2;
-var arrDate2 = [];
-
-var date3;
-var arrDate3 = [];
-
-var date4;
-var arrDate4 = [];
-
 var arrForecast = [];
 var arrWaterTemp = [];
 var arrSwell = [];
@@ -265,33 +252,6 @@ var arrSwellDir = [];
 var arrSwellPer = [];
 var arrTime = [];
 
-var arrForecast2 = [];
-var arrWaterTemp2 = [];
-var arrSwell2 = [];
-var arrSwellDir2 = [];
-var arrSwellPer2 = [];
-var arrTime2 = [];
-
-var arrForecast3 = [];
-var arrWaterTemp3 = [];
-var arrSwell3 = [];
-var arrSwellDir3 = [];
-var arrSwellPer3 = [];
-var arrTime3 = [];
-
-var arrForecast4 = [];
-var arrWaterTemp4 = [];
-var arrSwell4 = [];
-var arrSwellDir4 = [];
-var arrSwellPer4 = [];
-var arrTime4 = [];
-
-var arrForecast5 = [];
-var arrWaterTemp5 = [];
-var arrSwell5 = [];
-var arrSwellDir5 = [];
-var arrSwellPer5 = [];
-var arrTime5 = [];
 //current tide info
 var tideType;
 var tideTime;
@@ -323,7 +283,7 @@ weatherLatlng = userLatLng.toString();
 	    $.ajax({
 	      url: url,
 	      method: 'GET',
-	    }).done(function(data) {
+	    }).success(function(data) {
 	    	//
 	    	serverReq = data.data;
 	    	weather = serverReq.weather[0];
@@ -349,7 +309,7 @@ weatherLatlng = userLatLng.toString();
 
 			//add current tide info
 			var tideInfo = weather.tides[0];
-			for (var i = 0; i < 4; i++) {
+			for (var i = 0; i < 3; i++) {
 				//adds data to table for current tide information
 				tideType = tideInfo.tide_data[i].tide_type;
 				tideTime = tideInfo.tide_data[i].tideTime;
@@ -358,92 +318,37 @@ weatherLatlng = userLatLng.toString();
 
 
 			};
-
+			//empty out arrDate on every new search
+			arrDate.length = 0;
 			//dates for charts.js
-	    		date = serverReq.weather[0].date;
+			for (var i = 0; i < 5; i++){
+	    		date = serverReq.weather[i].date;
 	    			arrDate.push(moment(date).format("dd M/D"));
-	    		date2 = serverReq.weather[1].date;
-	    			arrDate1.push(moment(date2).format("dd M/D"));
-	    		date3 = serverReq.weather[2].date;
-	    			arrDate2.push(moment(date3).format("dd M/D"));
-	    		date4 = serverReq.weather[3].date;
-	    			arrDate3.push(moment(date4).format("dd M/D"));
-	    		date5 = serverReq.weather[4].date;
-	    			arrDate4.push(moment(date5).format("dd M/D"));
+	    	}; console.log(arrDate);
 
 	    	//SET OF FOR LOOPS TO PLOT DATA IN CHART.JS
-		    	for (i = 0; i < 4; i++) {
-		
-		    		hourlyTempF = serverReq.weather[0].hourly[i].tempF;
-		    		hourlySwell = serverReq.weather[0].hourly[i].swellHeight_ft;
-		    			arrSwell.push(hourlySwell);
-		    		hourlySwellDir = serverReq.weather[0].hourly[i].swellDir16Point;
-		    			arrSwellDir.push(hourlySwellDir);
-		    		hourlySwellPer = serverReq.weather[0].hourly[i].swellPeriod_secs;
-		    			arrSwellPer.push(hourlySwellPer);
-		    		hourlyWaterTemp = serverReq.weather[0].hourly[i].waterTemp_F;
-		    			arrWaterTemp.push(hourlyWaterTemp);
-		    		hourlyTime = serverReq.weather[0].hourly[i].time;
-		    			arrTime.push(hourlyTime);
-		    	};
-		    	for (i = 0; i < 4; i++) {
-		    		hourlyTempF = serverReq.weather[1].hourly[i].tempF;
-
-		    		hourlySwell = serverReq.weather[1].hourly[i].swellHeight_ft;
-		    			arrSwell2.push(hourlySwell);
-		    		hourlySwellDir = serverReq.weather[1].hourly[i].swellDir16Point;
-		    			arrSwellDir2.push(hourlySwellDir);
-		    		hourlySwellPer = serverReq.weather[1].hourly[i].swellPeriod_secs;
-		    			arrSwellPer2.push(hourlySwellPer);
-		    		hourlyWaterTemp = serverReq.weather[1].hourly[i].waterTemp_F;
-		    			arrWaterTemp2.push(hourlyWaterTemp);
-		    		hourlyTime = serverReq.weather[1].hourly[i].time;
-		    			arrTime2.push(hourlyTime);
-		    	};
-		    	for (i = 0; i < 4; i++) {
-		    		hourlyTempF = serverReq.weather[2].hourly[i].tempF;
-		    	
-		    		hourlySwell = serverReq.weather[2].hourly[i].swellHeight_ft;
-		    			arrSwell3.push(hourlySwell);
-		    		hourlySwellDir = serverReq.weather[2].hourly[i].swellDir16Point;
-		    			arrSwellDir3.push(hourlySwellDir);
-		    		hourlySwellPer = serverReq.weather[2].hourly[i].swellPeriod_secs;
-		    			arrSwellPer3.push(hourlySwellPer);
-		    		hourlyWaterTemp = serverReq.weather[2].hourly[i].waterTemp_F;
-		    			arrWaterTemp3.push(hourlyWaterTemp);
-		    		hourlyTime = serverReq.weather[2].hourly[i].time;
-		    			arrTime3.push(hourlyTime);
-		    	};
-		    	for (i = 0; i < 4; i++) {
-		    		hourlyTempF = serverReq.weather[3].hourly[i].tempF;
-
-		    		hourlySwell = serverReq.weather[3].hourly[i].swellHeight_ft;
-		    			arrSwell4.push(hourlySwell);
-		    		hourlySwellDir = serverReq.weather[3].hourly[i].swellDir16Point;
-		    			arrSwellDir4.push(hourlySwellDir);
-		    		hourlySwellPer = serverReq.weather[3].hourly[i].swellPeriod_secs;
-		    			arrSwellPer4.push(hourlySwellPer);
-		    		hourlyWaterTemp = serverReq.weather[3].hourly[i].waterTemp_F;
-		    			arrWaterTemp4.push(hourlyWaterTemp);
-		    		hourlyTime = serverReq.weather[3].hourly[i].time;
-		    			arrTime4.push(hourlyTime);
-		    	};
-		    	for (i = 0; i < 4; i++) {
-		    		hourlyTempF = serverReq.weather[4].hourly[i].tempF;
-		    		hourlySwell = serverReq.weather[4].hourly[i].swellHeight_ft;
-		    			arrSwell5.push(hourlySwell);
-		    		hourlySwellDir = serverReq.weather[4].hourly[i].swellDir16Point;
-		    			arrSwellDir5.push(hourlySwellDir);
-		    		hourlySwellPer = serverReq.weather[4].hourly[i].swellPeriod_secs;
-		    			arrSwellPer5.push(hourlySwellPer);
-		    		hourlyWaterTemp = serverReq.weather[4].hourly[i].waterTemp_F;
-		    			arrWaterTemp5.push(hourlyWaterTemp);
-		    		hourlyTime = serverReq.weather[4].hourly[i].time;
-		    			arrTime5.push(hourlyTime);
-		    	};
+	    	//empty out arrSwell on every event
+	    	arrSwell.length = 0;
+			for (var i = 0; i < 5; i++){
+				var weather = serverReq.weather[i];
+					for (var ia = 0; ia < 4; ia++) {
+						var hourlyTempF = weather.hourly[ia].tempF;
+							// arrTemp.push(hourlyTempF);
+						var hourlySwell = weather.hourly[ia].swellHeight_ft;
+							arrSwell.push(hourlySwell);
+						var hourlySwellDir = weather.hourly[ia].swellDir16Point;
+							// arrSwellDir.push(hourlySwellDir);
+						var hourlySwellPer = weather.hourly[ia].swellPeriod_secs;
+							// arrSwellPer.push(hourlySwellPer);
+						var hourlyWaterTemp = weather.hourly[ia].waterTemp_F;
+							// arrWaterTemp.push(hourlyWaterTemp);
+						var hourlyTime = weather.hourly[ia].time;
+							// arrTime.push(hourlyTime);
+					}; console.log(arrSwell);
+				};
+		    	chartJS();
 
 	    }); 
-
 }
 //***********************Global Variables for World Weather-Marine END************************************
 //***************************world wide weather online API END********************************
@@ -451,118 +356,130 @@ weatherLatlng = userLatLng.toString();
 //====================================================================================
 
 //********************************* Charts.js BEGIN ***************************************
-var ctx = $("#myChart"); 
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["6AM", "Noon", "6PM", "12AM"],
-        datasets: [{
-            label: arrDate,
-            data: arrSwell,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-            ],
-            borderWidth: 2
-        },
-        {
-            label: arrDate1,
-            data: arrSwell2,
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-            ],
-            borderWidth: 2
-        },
-        {
-            label: arrDate2,
-            data: arrSwell2,
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-            ],
-            borderWidth: 2
-        },
-        {
-            label: arrDate3,
-            data: arrSwell3,
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-            ],
-            borderWidth: 2
-        },
-        {
-            label: arrDate4,
-            data: arrSwell5,
-            backgroundColor: [
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-            ],
-            borderColor: [
-                'rgba(153, 102, 255, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(153, 102, 255, 1)',
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                },
-                scaleLabel: {
-        			display: true,
-        			labelString: 'Max Surf in ft',
-        		}
-            }]
-        }
-    },
 
-    responsive: true,
-});
+var myChart
+function chartJS(){
+		var ctx = $("#myChart"); 
+		myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: ["6AM", "Noon", "6PM", "12AM"],
+		        datasets: [{
+		            label: arrDate[0],
+		            data: arrSwell.slice(0, 3),
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(255,99,132,1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(255,99,132,1)',
+		            ],
+		            borderWidth: 2
+		        },
+		        {
+		            label: arrDate[1],
+		            data: arrSwell.slice(4, 7),
+		            backgroundColor: [
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(54, 162, 235, 1)',
+		            ],
+		            borderWidth: 2
+		        },
+		        {
+		            label: arrDate[2],
+		            data: arrSwell.slice(8, 11),
+		            backgroundColor: [
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(255, 206, 86, 1)',
+		            ],
+		            borderWidth: 2
+		        },
+		        {
+		            label: arrDate[3],
+		            data: arrSwell.slice(12, 15),
+		            backgroundColor: [
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(75, 192, 192, 1)',
+		            ],
+		            borderWidth: 2
+		        },
+		        {
+		            label: arrDate[4],
+		            data: arrSwell.slice(16, 19),
+		            backgroundColor: [
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(153, 102, 255, 1)',
+		            ],
+		            borderWidth: 2
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                },
+		                scaleLabel: {
+		        			display: true,
+		        			labelString: 'Max Surf in ft',
+		        		}
+		            }]
+		        }
+		    },
+
+		    responsive: true,
+		});
+};
+//resets chart.js after event
+function resetCanvas() {
+	myChart.destroy();
+	chartJS();
+}
 //********************************* Charts.js END  ***************************************
 //====================================================================================
 
 //Attach an event listener to search button and call the initMap function to update map location 
-$("#searchButton").on('click', initMap);
+$("#searchButton").on('click',  function() {
+	resetCanvas();
+	initMap();
+});
 
 
   function GetFoodPlaces(userLatLng){
