@@ -3,54 +3,38 @@
 // //         KEY:   AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw
 // //              #userSearch is user input variable
 
-// After the API loads, call a function to enable the search box.
-function handleAPILoaded() {
-    $('#searchButton').attr('disabled', false);
-}
-
-// Search for a specified string.
-function search() {
-    var q = $('#user-search').val();
-    console.log("q: " + q);
-    var request = gapi.client.youtube.search.list({
-        q: q,
-        part: 'snippet'
-    });
-
-    request.execute(function(response) {
-        var str = JSON.stringify(response.result);
-        console.log("received from YouTube: " + str);
-        $('#weatherContainer').html('<pre>' + str + '</pre>');
-    });
-};
-
 // event listener to search YoutTube when user clicks search button
-$("#searchButton").on("click", function() {
-
-    // on click, the surfboard logo calls the SVG Animator library to animate it
-    new Vivus('animatedLogo', { duration: 100 });
-
-    var query = $('#user-search').val();
-    var key = "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
+$("#searchButton").on("click", function(){
 
 
-    var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + query + " beach" + "&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key=" + key;
+	// on click, the surfboard logo calls the SVG Animator library to animate it
+	new Vivus('animatedLogo', {duration: 100});
+
+	var query = $('#user-search').val();
+
+  // updates city name
+   $("#logoFont2").html(query);
+
+	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
 
+	var queryURL="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+query+" beach"+"&part=player&safeSearch=strict&videoEmbeddable=true&type=video&key="+key;
+	
+	
+	
+	$.ajax({
+		url: queryURL,
+		method: "GET",
 
-    $.ajax({
-        url: queryURL,
-        method: "GET",
+	}).done(function(response) {
 
-    }).done(function(response) {
-
-        console.log(response);
-        var imageUrl = response.items[0].snippet.thumbnails.high.url;
-        var videoID = response.items[0].id.videoId;
-        console.log(imageUrl);
-        $("#weatherContainer").css('background-image', "url(" + imageUrl + ")");
-        $("#myVideo").attr("src", "https://youtube.com/embed/" + videoID + "?autoplay=1&controls=0&showinfo=0&autohide=1");
-    });
+		console.log(response);
+		var imageUrl= response.items[0].snippet.thumbnails.high.url;
+		var videoID= response.items[0].id.videoId;
+		console.log(imageUrl);
+		$("#weatherContainer").css('background-image', "url("+imageUrl+")");
+		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1");
+	});
 });
 
 
@@ -69,13 +53,9 @@ function initMap() {
     //********************************************** Create the map and center it initially to San Diego **************************************************//
     if ($("#user-search").val() == "") {
         userSearch = "San Diego";
-        console.log(userSearch);
-        $("#logoFont2").html(userSearch);
     } else {
         userSearch = $("#user-search").val();
-        console.log(userSearch);
-        $("#logoFont2").html(userSearch); //adds location to id logoFont2
-    } 
+    }
 
     map = new google.maps.Map(document.getElementById('mapBox'), { zoom: 12, scrollwheel: false });
 
@@ -97,7 +77,7 @@ function initMap() {
     //******************************************************** Create surf related markers on the Map  ****************************************************//
 
     //create markers only when there is a user search
-   
+
         //function to create the markers on the map 
         geocoder.geocode({
             'address': userSearch
@@ -106,6 +86,7 @@ function initMap() {
                 userLatLng = results[0].geometry.location; // Assign the latitude and longtude object from the first result to userLatLng variable
               	localWWAPI(userLatLng);
               	worldWideWeather(userLatLng);
+                GetFoodPlaces(userLatLng);
             }
 
             //Request takes the userLatLng variable and hard coded radius, type
@@ -120,7 +101,6 @@ function initMap() {
 
         });
 
-    
     //************************************************************** Adding autocomplete search ************************************************************//
     //get the input field ans assign it to the input variable 
     var input = document.getElementById('user-search');
@@ -131,7 +111,7 @@ function initMap() {
     autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
-    geolocate()
+    geolocate();
 
 
     //*************************************************************** Add the give directions to the markers ***********************************************//    
@@ -168,14 +148,12 @@ function createMarker(place) {
         position: place.geometry.location
     });
 
-
-
     //Add an event lilstener to the markers so when they are clicked the info window is displayed
     google.maps.event.addListener(marker, 'click', function() {
         var service = new google.maps.places.PlacesService(map);
         var request = { reference: place.reference };
         service.getDetails(request, function(details, status) {
-            infowindow.setContent(details.name + "<br />" + details.formatted_address + "<br />" + details.website + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
+            infowindow.setContent("<strong>" + details.name + "<strong>" + "<br />" + details.formatted_address + "<br />" + "<a href=" + details.website + ">"+ details.website + "</a>" + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
         });
         infowindow.open(map, this);
         if (this.getAnimation() !== null) {
@@ -586,12 +564,8 @@ var myChart = new Chart(ctx, {
 //Attach an event listener to search button and call the initMap function to update map location 
 $("#searchButton").on('click', initMap);
 
-//  GOOGLE PLACES  
-// KEY:  AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs
 
-
-function GetFoodPlaces(userLatLng){
-
+  function GetFoodPlaces(userLatLng){
 
   var GPquery = $('#user-search').val();
   var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
@@ -599,7 +573,7 @@ function GetFoodPlaces(userLatLng){
   var foodLatLng = userLatLng.toString(); 
   foodLatLng = foodLatLng.substring(1, foodLatLng.length -1);
 
-  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=1000&type=restaurant&key="+GPkey;
+  var GPqueryURL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+foodLatLng+"&radius=4000&type=restaurant&key="+GPkey;
   
   
       $.ajax({
@@ -611,17 +585,24 @@ function GetFoodPlaces(userLatLng){
       }
     })
     .done(function(response){
-
       console.log("Google Places: ");
       console.log(response);
-      $("FSResultsHere").empty();
+     
 
       for (i=0; i< 5; i++){
 
           var newDiv= $("<div class='foodPlace'>");
           var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
-          var title=response.data.results[i].photos[0].html_attributions;
+          var title=response.data.results[i].photos[0].html_attributions[0];
           var br=$("<br>");
+          var row=$("<div>");
+
+            for(j=1; j<=response.data.results[i].rating; j++){
+              // prints a star for each rating number
+              var star=$("<span>").html("&#9733;");
+              row.append(star);
+            }
+
           var open= "OPEN";
           var closed= "CLOSED";
           if (response.data.results[i].opening_hours.open_now === true) {
@@ -631,11 +612,41 @@ function GetFoodPlaces(userLatLng){
             var openNow=$("<span class='closedNow'>").html(closed);
           }
 
-          newDiv.append(icon).append(title).append(br).append(openNow);
+          newDiv.append(icon).append(title).append(br).append(row).append(openNow);
           $("#FSResultsHere").append(newDiv).fadeIn('slow');
+
+
+
       };
 
     });
 
-
 };
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+                center: geolocation,
+                radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+        });
+    }
+  };
+      
+
+$(window).ready(function(){
+  new Vivus('animatedMain', {duration: 100});
+});
+
+//Attach an event listener to search button and call the initMap function to update map location 
+$("#searchButton").on('click', initMap);
+
+//************************************************************** End of Google Maps Api usage *************************************************************//
