@@ -50,9 +50,11 @@ surfStorage.ref().on("child_added", function(newChild){
   $("#recentlySearchedResultsHere").append(storedSearchBtn);
   //creating an on click event which uses our showPreviousConditions function to display previous conditions
   storedSearchBtn.on("click", function(){
-    console.log($(this).attr("data-location"));
-    locationName = $(this).attr("data-location")
+    //storing the data attribute from the storedSearchBtn in a variable
+    locationName = $(this).attr("data-location");
+    //updating the html with the location name
     $("#logoFont2").html(locationName);
+    //calling our initmap function
     initMap();
   });
 
