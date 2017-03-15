@@ -1,22 +1,22 @@
 
  
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyC9wP1vydAT-A-xzYxjEKjAPnnjyq0znsI",
-    authDomain: "armsurfing-9502f.firebaseapp.com",
-    databaseURL: "https://armsurfing-9502f.firebaseio.com",
-    storageBucket: "armsurfing-9502f.appspot.com",
-    messagingSenderId: "231633652696"
-  };
-  firebase.initializeApp(config);
-  
-  var surfStorage = firebase.database();
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyC9wP1vydAT-A-xzYxjEKjAPnnjyq0znsI",
+  authDomain: "armsurfing-9502f.firebaseapp.com",
+  databaseURL: "https://armsurfing-9502f.firebaseio.com",
+  storageBucket: "armsurfing-9502f.appspot.com",
+  messagingSenderId: "231633652696"
+};
+firebase.initializeApp(config);
 
+var surfStorage = firebase.database();
+//click event that will store our user's input into firebase
 $("#searchButton").on("click", function(){
-	
+
+  alert("this works");
+	//grabbing user input 
 	var userInput = $("#user-search").val().trim();
-	//create new api url thats associated with user input
-	var newQueryURL = basicQueryURL + userInput;
 	//object to store user input into firebase
 	var surfObj = {
 
@@ -27,16 +27,32 @@ $("#searchButton").on("click", function(){
 	surfStorage.ref().push(surfObj);
 	//preventing the on submit default setting
 	return false;
-})
+});
+
+function showPreviousConditions() {
+  //getting the data attribute from our storedSearchBtn
+  var locationName = $(this).attr("data-location");
+  //passing our initMap function the name of the location that is stored in firebase
+  initMap(locationName);
+}
 
 surfStorage.ref().on("child_added", function(newChild){
-	//checking our data we're receiving from firebase
-	console.log(newChild);
+  //checking our data we're receiving from firebase
+  console.log(newChild);
+  //creating a new button for user to check recently searched spot conditions
+  var storedSearchBtn = $("<button type='submit' value='View Report' class='btn btn-warning' id='firebaseBtn'>");
 	//getting our user input from firebase
 	var newLocation = newChild.val().location;
+  //checking our new location
 	console.log(newLocation);
+  //adding a data attribute to the button of newLocation
+  storedSearchBtn.attr("data-location", newLocation);
+  //appending user search and button to our firebaseTable
+  $("#firebaseTable").append("<tr><td>" + newLocation + "</td><td>" + recentlySearchedBtn + "</td></tr>");
+  //creating an on click event which uses our showPreviousConditions function to display previous conditions
+  storedSearchBtn.on("click", showPreviousConditions);
 
-})
+});
 
 var apiKey = "094f52c21f8d4c3dbff24712170903";
 
@@ -153,7 +169,7 @@ $("#searchButton").on("click", function(){
    var request = {};
    var userLatLng;
    //function to initalize the map this is initially called from the html via parameter callback=initMap
-   function initMap() {
+   function initMap(locationName) {
 
        // Clear out the old markers.
        // markers.forEach(function(marker) {
@@ -244,11 +260,11 @@ $("#searchButton").on("click", function(){
        });
 
        return marker;
-   }
+    }
 
 
    //Attach an event listener to search button and call the initMap function to update map location 
-   $("#searchButton").on('click', initMap);
+   //$("#searchButton").on('click', initMap);
 
 
 
