@@ -223,7 +223,7 @@ function createMarker(place) {
           }
 
           newDiv.append(icon).append(title).append(br).append(row).append(openNow);
-          $("#FSResultsHere").append(newDiv).fadeIn('slow');
+          $("#FSResultsHere").append(newDiv);
 
 
 

@@ -158,7 +158,13 @@ html, body{
 #videoBox{
 
 	min-height: 580px;
-	background-color: darkgrey;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#153b77+0,532970+100 */
+background: rgb(21,59,119); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(21,59,119,1) 0%, rgba(83,41,112,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(21,59,119,1) 0%,rgba(83,41,112,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(21,59,119,1) 0%,rgba(83,41,112,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#153b77', endColorstr='#532970',GradientType=0 ); /* IE6-9 */
+
 
 }
 
@@ -206,15 +212,16 @@ html, body{
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+
 }
 
 .foodPlace{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6f8f9+0,e5ebee+50,d7dee3+51,f5f7f9+100;White+Gloss */
-background: rgb(246,248,249); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#828c95+0,b5bdc8+20,828c95+40,28343b+51,28343b+100 */
+background: rgb(130,140,149); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(130,140,149,1) 0%, rgba(181,189,200,1) 20%, rgba(130,140,149,1) 40%, rgba(40,52,59,1) 51%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(130,140,149,1) 0%,rgba(181,189,200,1) 20%,rgba(130,140,149,1) 40%,rgba(40,52,59,1) 51%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(130,140,149,1) 0%,rgba(181,189,200,1) 20%,rgba(130,140,149,1) 40%,rgba(40,52,59,1) 51%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#828c95', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
 
 	flex:1;
 	color: white;
@@ -226,13 +233,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 }
 
 .foodPlace:hover{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b7deed+0,71ceef+50,21b4e2+51,b7deed+100;Shape+1+Style */
-background: rgb(183,222,237); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=0 ); /* IE6-9 */
-
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#28146d+0,af68d6+20,28146d+40,100e49+51,0d1214+100 */
+background: rgb(40,20,109); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(40,20,109,1) 0%, rgba(175,104,214,1) 20%, rgba(40,20,109,1) 40%, rgba(16,14,73,1) 51%, rgba(13,18,20,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(40,20,109,1) 0%,rgba(175,104,214,1) 20%,rgba(40,20,109,1) 40%,rgba(16,14,73,1) 51%,rgba(13,18,20,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(40,20,109,1) 0%,rgba(175,104,214,1) 20%,rgba(40,20,109,1) 40%,rgba(16,14,73,1) 51%,rgba(13,18,20,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28146d', endColorstr='#0d1214',GradientType=0 ); /* IE6-9 */
 
 }
 
@@ -241,10 +247,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', end
 }
 
 .foodPlace a{
+	color: white;
 	text-decoration: none;
 	font-family: sans-serif;
 	font-weight: bold;
-	color: #545454;
+	margin: 3px;
 }
 
 .openNow{
@@ -294,7 +301,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', end
 	margin:0;
 	padding: 0;
 	border-bottom: 4px orange solid;
-	display: flex;
+	
 }
 
 #recentlySearchedTitle{
