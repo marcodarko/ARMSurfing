@@ -85,9 +85,9 @@ $("#searchButton").on("click", function(){
     }
 
    $("#logoFont2").html(shortQuery);
-   
+
    shortQuery = shortQuery.join('');
-   console.log(shortQuery);
+
 
 	var key= "AIzaSyC6LO4qKI_80tPEvtewuNRj5KvYZyJyhIw";
 
@@ -378,11 +378,10 @@ weatherLatlng = userLatLng.toString();
 				var moonset = astronomy.moonrise;
 				var sunrise = astronomy.sunrise;
 				var sunset = astronomy.sunset;
-			$("#astronomyInfo").append("<tr><th>" + "Sunrise" + "</th><td>" + sunrise + "</td></tr>") 
-							   .append("<tr><th>" + "Sunset" + "</th><td>" + sunset + "</td></tr>")
-							   .append("<tr><th>" + "Moonrise" + "</th><td>" + moonrise + "</td></tr>")
-							   .append("<tr><th>" + "Moonset" + "</th><td>" + moonset + "</td></tr>");
-							
+		$("#tideInfo").append("<tr><th>" + "Sunrise" + "</th><td>" + sunrise + "</td>" + "<td></td></tr>")
+                               .append("<tr><th>" + "Sunset" + "</th><td>" + sunset + "</td>" + "<td></td></tr>")
+                               .append("<tr><th>" + "Moonrise" + "</th><td>" + moonrise + "</td>" + "<td></td></tr>")
+                               .append("<tr><th>" + "Moonset" + "</th><td>" + moonset + "</td>" + "<td></td></tr>");
 
 			//add current tide info
 			var tideInfo = weather.tides[0];
@@ -535,7 +534,7 @@ function chartJS(){
 		                },
 		                scaleLabel: {
 		        			display: true,
-		        			labelString: 'Max Surf in ft',
+		        			labelString: 'Maximum Swell Ft',
 		        		}
 		            }]
 		        },
@@ -566,6 +565,8 @@ $("#searchButton").on('click',  function() {
 
   function GetFoodPlaces(userLatLng){
 
+    $("#FSResultsHere").empty();
+
   var GPquery = $('#user-search').val();
   var GPkey= "AIzaSyC6_5yYr2hXqg3o87v99-IiRAsdJW2ZlFs";
 
@@ -593,12 +594,13 @@ $("#searchButton").on('click',  function() {
           var newDiv= $("<div class='foodPlace'>");
           var icon=$("<img><br>").attr("src",response.data.results[i].icon).attr("alt","icon");
           var title=response.data.results[i].photos[0].html_attributions[0];
+          $(title).attr("target", "_blank");
           var br=$("<br>");
           var row=$("<div>");
 
             for(j=1; j<=response.data.results[i].rating; j++){
               // prints a star for each rating number
-              var star=$("<span>").html("&#9733;");
+              var star=$("<span class='stars'>").html("&#9733;");
               row.append(star);
             }
 
@@ -612,11 +614,15 @@ $("#searchButton").on('click',  function() {
           }
 
           newDiv.append(icon).append(title).append(br).append(row).append(openNow);
-          $("#FSResultsHere").append(newDiv).fadeIn('slow');
+          $("#FSResultsHere").append(newDiv);
 
 
 
       };
+
+    }).fail(function(){
+
+      notie.alert({ type: 1, text: 'Boo! No food around here..', position: 'bottom' })
 
     });
 
@@ -642,7 +648,25 @@ function geolocate() {
       
 
 $(window).ready(function(){
-  new Vivus('animatedMain', {duration: 100});
+
+notie.input({
+  text: 'Do you want to receive surf updates:',
+  submitText: 'Submit',
+  cancelText: 'Nah, bro',
+  cancelCallback: function (value) {
+    notie.alert({ type: 3, text: 'No problem, enjoy!'  });
+     new Vivus('animatedMain', {duration: 100});
+    //database.push(value);
+  },
+  submitCallback: function (value) {
+    notie.alert({ type: 1, text: 'You entered: ' + value+".  We'll keep you updated!" });
+    new Vivus('animatedMain', {duration: 100});
+  },
+  value: '',
+  type: 'email',
+  placeholder: 'name@example.com'
+})
+
 });
 
 //Attach an event listener to search button and call the initMap function to update map location 
