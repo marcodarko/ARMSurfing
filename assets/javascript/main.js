@@ -216,9 +216,9 @@ var url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?";
 
            $("#weatherIcon").attr("src", weatherIcon).css("border-radius", "100%");
            $(".tempF").html(currentTemp + " &deg;F");
-           $(".feelsLike").html("Feels like " + feelsLike + " &deg;F");
-           $(".humidity").html("Humidity " + humidity);
-           $(".windSpeed").html("Wind speed " + windSpeed);
+           $(".feelsLike").html("Feels like: " + feelsLike + " &deg;F");
+           $(".humidity").html("Humidity: " + humidity + "%");
+           $(".windSpeed").html("Wind speed: " + windSpeed + " mph");
 });
 }
 //---------------------------end of local----------------------------------------------
@@ -309,7 +309,6 @@ weatherLatlng = userLatLng.toString();
 
 			//add current tide info
 			var tideInfo = weather.tides[0];
-			console.log(weather);
 			for (var i = 0; i < 3; i++) {
 				//adds data to table for current tide information
 				tideType = tideInfo.tide_data[i].tide_type;
@@ -463,8 +462,13 @@ function chartJS(){
 		        		}
 		            }]
 		        },
+		        title: {
+            		display: true,
+            		text: '5-day Swell Forecast in ft.',
+            		fontColor: "#fff",
+            		fontSize: 16
+      			},	
 		    },
-
 		    responsive: true,
 		});
 };
