@@ -159,13 +159,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 
 .dayInfoBox th{
-	font-size: 2em;
+	font-size: 15px;
 	color: #4dcdff;
 	font-weight: bold;
 }
 
 .dayInfoBox td{
-	font-size: 2em;
+	font-size: 15px;
 }
 
 .dayInfoBox thead td{
