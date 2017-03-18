@@ -37,13 +37,11 @@ $("#searchButton").on("click", function(){
 
 surfStorage.ref().on("child_added", function(newChild){
   //checking our data we're receiving from firebase
-  console.log(newChild);
   //getting our user input from firebase
   var newLocation = newChild.val().location;
   //creating a new button for user to check recently searched spot conditions
   var storedSearchBtn = $("<button type='submit' class='recentButton' id='firebaseBtn'>").html(newLocation);
   //checking our new location
-	console.log(newLocation);
   //adding a data attribute to the button of newLocation
   storedSearchBtn.attr("data-location", newLocation);
   //appending user search and button to our firebaseTable
@@ -102,10 +100,8 @@ $("#searchButton").on("click", function(){
 
 	}).done(function(response) {
 
-		console.log(response);
 		var imageUrl= response.items[0].snippet.thumbnails.high.url;
 		var videoID= response.items[0].id.videoId;
-		console.log(imageUrl);
 		$("#weatherContainer").css('background-image', "url("+imageUrl+")");
 		$("#myVideo").attr("src","https://youtube.com/embed/"+videoID+"?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1");
 	});
@@ -139,7 +135,6 @@ function initMap() {
 
     geocoder = new google.maps.Geocoder;
     geocoder.geocode({ 'address': userSearch }, function(results, status) {
-        console.log(status);
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
             // new google.maps.Marker({
@@ -188,21 +183,6 @@ function initMap() {
 
 
     geolocate();
-
-
-    //*************************************************************** Add the give directions to the markers ***********************************************//    
-
-    $.ajax({
-            method: "POST",
-            dataType: "json",
-            url: "https://proxy-cbc.herokuapp.com/proxy",
-            data: {
-                url: "https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|Lexington,MA&key=AIzaSyDlgpSK2LLlZPwHPXu2FKoscGmmDo0aEtA"
-            }
-        })
-        .done(function(response) {
-            console.log(response);
-        });
 
 
 }; //End of initMap function *******
@@ -585,8 +565,7 @@ $("#searchButton").on('click',  function() {
       }
     })
     .done(function(response){
-      console.log("Google Places: ");
-      console.log(response);
+     
      
 
       for (i=0; i< 5; i++){
